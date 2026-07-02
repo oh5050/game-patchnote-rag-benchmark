@@ -1,0 +1,56 @@
+{
+  "per_axis": {
+    "correctness": {
+      "agree": 2,
+      "total": 3,
+      "pct": 66.7
+    },
+    "faithfulness": {
+      "agree": 2,
+      "total": 3,
+      "pct": 66.7
+    },
+    "hallucination": {
+      "agree": 1,
+      "total": 1,
+      "pct": 100.0
+    }
+  },
+  "by_method": {
+    "rule": {
+      "agree": 4,
+      "total": 4,
+      "pct": 100.0
+    },
+    "llm": {
+      "agree": 1,
+      "total": 3,
+      "pct": 33.3
+    }
+  },
+  "overall": {
+    "agree": 5,
+    "total": 7,
+    "pct": 71.4
+  },
+  "mismatches": [
+    {
+      "qid": "q003",
+      "axis": "correctness",
+      "human_label": "correct",
+      "expected_verdict": "yes",
+      "judge_verdict": "no",
+      "judge_reason": "규칙 애매(2/3) → LLM: 핵심 정보인 '빙하의 심판'의 기본 쿨다운이 120초로 늘어났다는 부분만 다르다",
+      "method": "llm"
+    },
+    {
+      "qid": "q003",
+      "axis": "faithfulness",
+      "human_label": "correct",
+      "expected_verdict": "yes",
+      "judge_verdict": "no",
+      "judge_reason": "오버랩 애매(0.46) → LLM: 답변에 시즌2 밸런스 패치와 관련된 내용이 포함되어 있지만, 이는 주어진 문서들로만 확인할 수 없다.",
+      "method": "llm"
+    }
+  ]
+}

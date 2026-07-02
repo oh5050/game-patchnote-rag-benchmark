@@ -1,0 +1,244 @@
+{
+  "config": {
+    "judge_mode": "hybrid",
+    "judge_model": "qwen2.5:3b",
+    "k": 5
+  },
+  "per_query": [
+    {
+      "qid": "q001",
+      "answer_type": "fact",
+      "correctness": {
+        "verdict": "yes",
+        "reason": "gold 키워드 전부 매칭 ['빙하의 심판', '궁극기']",
+        "method": "rule"
+      },
+      "faithfulness": {
+        "verdict": "yes",
+        "reason": "context 어휘 오버랩 0.67 (>= 0.6)",
+        "method": "rule"
+      }
+    },
+    {
+      "qid": "q002",
+      "answer_type": "multi_hop",
+      "correctness": {
+        "verdict": "yes",
+        "reason": "gold 키워드 전부 매칭 ['5', '서리송곳니']",
+        "method": "rule"
+      },
+      "faithfulness": {
+        "verdict": "yes",
+        "reason": "context 어휘 오버랩 0.73 (>= 0.6)",
+        "method": "rule"
+      }
+    },
+    {
+      "qid": "q003",
+      "answer_type": "outdated_trap",
+      "correctness": {
+        "verdict": "no",
+        "reason": "규칙 애매(2/3) → LLM: 핵심 사실이 다르다: 패치 정보와 쿨감 세팅 변경에 대한 설명이 다름",
+        "method": "llm"
+      },
+      "faithfulness": {
+        "verdict": "no",
+        "reason": "오버랩 애매(0.50) → LLM: 답변에 시즌2 밸런스 패치와 관련된 정보는 없음",
+        "method": "llm"
+      },
+      "hallucination": {
+        "verdict": "no",
+        "reason": "규칙 게이트 통과: A(정정신호)=['패치', '변경'] & B(정답수치)=['120초'] → 환각 아님",
+        "method": "rule"
+      }
+    },
+    {
+      "qid": "q004",
+      "answer_type": "fact",
+      "correctness": {
+        "verdict": "yes",
+        "reason": "gold 키워드 전부 매칭 ['스카이폴 엣지', '오리진']",
+        "method": "rule"
+      },
+      "faithfulness": {
+        "verdict": "yes",
+        "reason": "context 어휘 오버랩 0.78 (>= 0.6)",
+        "method": "rule"
+      }
+    },
+    {
+      "qid": "q005",
+      "answer_type": "multi_hop",
+      "correctness": {
+        "verdict": "yes",
+        "reason": "gold 키워드 전부 매칭 ['8', '워크라이 오스']",
+        "method": "rule"
+      },
+      "faithfulness": {
+        "verdict": "yes",
+        "reason": "context 어휘 오버랩 0.62 (>= 0.6)",
+        "method": "rule"
+      }
+    },
+    {
+      "qid": "q006",
+      "answer_type": "outdated_trap",
+      "correctness": {
+        "verdict": "no",
+        "reason": "규칙 애매(2/3) → LLM: 베른하르트의 스카이폴 엣지 최종 데미지 증가율 변경 정보와 상관없음",
+        "method": "llm"
+      },
+      "faithfulness": {
+        "verdict": "no",
+        "reason": "오버랩 애매(0.42) → LLM: 주어진 문서에 베른하르트의 스카이폴 엣지 스킬 최종 데미지 증가율 변경 정보 없음",
+        "method": "llm"
+      },
+      "hallucination": {
+        "verdict": "no",
+        "reason": "규칙 게이트 통과: A(정정신호)=['패치', '변경'] & B(정답수치)=['55%'] → 환각 아님",
+        "method": "rule"
+      }
+    },
+    {
+      "qid": "q007",
+      "answer_type": "fact",
+      "correctness": {
+        "verdict": "yes",
+        "reason": "gold 키워드 전부 매칭 ['아스트랄 카타클리즘', '오리진']",
+        "method": "rule"
+      },
+      "faithfulness": {
+        "verdict": "yes",
+        "reason": "context 어휘 오버랩 0.78 (>= 0.6)",
+        "method": "rule"
+      }
+    },
+    {
+      "qid": "q008",
+      "answer_type": "multi_hop",
+      "correctness": {
+        "verdict": "yes",
+        "reason": "gold 키워드 전부 매칭 ['6', '매나 서지']",
+        "method": "rule"
+      },
+      "faithfulness": {
+        "verdict": "yes",
+        "reason": "오버랩 애매(0.56) → LLM: ",
+        "method": "llm"
+      }
+    },
+    {
+      "qid": "q009",
+      "answer_type": "outdated_trap",
+      "correctness": {
+        "verdict": "no",
+        "reason": "gold 키워드 0/3 매칭",
+        "method": "rule"
+      },
+      "faithfulness": {
+        "verdict": "yes",
+        "reason": "오버랩 애매(0.42) → LLM: ",
+        "method": "llm"
+      },
+      "hallucination": {
+        "verdict": "no",
+        "reason": "규칙 게이트 미충족: A=False[], B=False(정답수치 ['40초'] 중 [] 포함) → LLM: ",
+        "method": "llm"
+      }
+    },
+    {
+      "qid": "q010",
+      "answer_type": "fact",
+      "correctness": {
+        "verdict": "yes",
+        "reason": "gold 키워드 전부 매칭 ['템페스트 레인', '오리진']",
+        "method": "rule"
+      },
+      "faithfulness": {
+        "verdict": "yes",
+        "reason": "context 어휘 오버랩 0.78 (>= 0.6)",
+        "method": "rule"
+      }
+    },
+    {
+      "qid": "q011",
+      "answer_type": "multi_hop",
+      "correctness": {
+        "verdict": "yes",
+        "reason": "gold 키워드 전부 매칭 ['7', '호크 사이트']",
+        "method": "rule"
+      },
+      "faithfulness": {
+        "verdict": "yes",
+        "reason": "context 어휘 오버랩 0.62 (>= 0.6)",
+        "method": "rule"
+      }
+    },
+    {
+      "qid": "q012",
+      "answer_type": "outdated_trap",
+      "correctness": {
+        "verdict": "no",
+        "reason": "gold 키워드 0/3 매칭",
+        "method": "rule"
+      },
+      "faithfulness": {
+        "verdict": "no",
+        "reason": "context 어휘 오버랩 0.20 (<= 0.3)",
+        "method": "rule"
+      },
+      "hallucination": {
+        "verdict": "no",
+        "reason": "규칙 게이트 미충족: A=False[], B=False(정답수치 ['35%'] 중 [] 포함) → LLM: ",
+        "method": "llm"
+      }
+    },
+    {
+      "qid": "q013",
+      "answer_type": "fact",
+      "correctness": {
+        "verdict": "yes",
+        "reason": "gold 키워드 전부 매칭 ['섀도우 이클립스', '오리진']",
+        "method": "rule"
+      },
+      "faithfulness": {
+        "verdict": "yes",
+        "reason": "context 어휘 오버랩 0.78 (>= 0.6)",
+        "method": "rule"
+      }
+    },
+    {
+      "qid": "q014",
+      "answer_type": "multi_hop",
+      "correctness": {
+        "verdict": "yes",
+        "reason": "gold 키워드 전부 매칭 ['9', '페이탈 마크']",
+        "method": "rule"
+      },
+      "faithfulness": {
+        "verdict": "yes",
+        "reason": "오버랩 애매(0.54) → LLM: ",
+        "method": "llm"
+      }
+    },
+    {
+      "qid": "q015",
+      "answer_type": "outdated_trap",
+      "correctness": {
+        "verdict": "yes",
+        "reason": "규칙 애매(2/3) → LLM: ",
+        "method": "llm"
+      },
+      "faithfulness": {
+        "verdict": "no",
+        "reason": "context 어휘 오버랩 0.30 (<= 0.3)",
+        "method": "rule"
+      },
+      "hallucination": {
+        "verdict": "no",
+        "reason": "규칙 게이트 통과: A(정정신호)=['패치'] & B(정답수치)=['45초'] → 환각 아님",
+        "method": "rule"
+      }
+    }
+  ]
+}

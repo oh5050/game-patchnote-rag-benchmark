@@ -1,0 +1,7 @@
+# 게임 도메인 문서 코퍼스. 실제 데이터: docs.json
+# 스키마(항목별):
+#   - doc_id  : 문서 고유 ID (str)
+#   - content : 본문. 소형 모델 부담 완화를 위해 300자 내외 (str)
+#   - period  : "pre_patch" | "post_patch"  ← 구버전 hallucination 탐지의 정답 근거
+#   - source  : 출처 (str)
+# 사용처: src/indexing/embedder.py, src/indexing/vector_store.py (인덱스 구축)

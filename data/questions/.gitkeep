@@ -1,0 +1,14 @@
+# 평가 질문 + 골드 답변. 실제 데이터: questions.json
+# 스키마(항목별):
+#   - qid                  : 질문 고유 ID (str)
+#   - question             : 질문 (str)
+#   - gold_answer          : 골드 답변 (str)
+#   - gold_answer_keywords : 규칙 기반 correctness 채점용 핵심 토큰 2~4개 (list[str])
+#   - answer_type          : "fact" | "multi_hop" | "outdated_trap"
+#   - valid_period         : "pre_patch" | "post_patch" (현재 유효한 정답 기준)
+#   - difficulty           : "easy" | "medium" | "hard"
+#   - human_label          : (선택) judge 신뢰성 검증용 사람 라벨(축별 dict)
+#       {correctness: "correct"|"incorrect",
+#        faithfulness: "correct"|"incorrect",
+#        hallucination: "yes"|"no"}   (hallucination 은 outdated_trap 에만)
+# 사용처: run_retrieval / run_generation / run_eval 의 입력

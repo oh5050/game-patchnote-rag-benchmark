@@ -1,0 +1,4 @@
+# 검색 정답(relevance) 레이블. 실제 데이터: qrels.json
+# 스키마: {qid: {doc_id: relevance}}  (graded relevance; 2=매우관련, 1=관련)
+#   - 단순 형태 {qid: [doc_id, ...]} 도 허용 (relevance=1 로 간주)
+# 사용처: src/evaluation/search_eval.py (recall@k, nDCG@k, MRR 등)

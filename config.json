@@ -1,0 +1,9 @@
+{
+  "k": 5,
+  "embedding_model": "intfloat/multilingual-e5-small",
+  "gen_model": "qwen2.5:3b",
+  "judge_model": "qwen2.5:3b",
+  "seed": 42,
+  "judge_mode": "hybrid",
+  "device": "cpu"
+}

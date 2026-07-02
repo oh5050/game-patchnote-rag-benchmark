@@ -1,0 +1,28 @@
+# ---------------------------------------------------------------------------
+# Local game-domain RAG evaluation harness dependencies.
+# Principle: fully local, no external APIs.
+#   - generation/judge models: small open models served by Ollama (default qwen2.5:3b)
+#   - embeddings: local sentence-transformers model
+# Install: pip install -r requirements.txt
+# Note: Ollama itself must be installed separately (https://ollama.com);
+#       the pip package below is only the client.
+# (ASCII-only on purpose: pip reads this file with the OS locale codec.)
+# ---------------------------------------------------------------------------
+
+# Embeddings (local)
+sentence-transformers>=3.0.0
+torch>=2.2.0
+
+# Vector search (local index)
+faiss-cpu>=1.8.0
+numpy>=1.26.0
+
+# Ollama client (talks to local server)
+ollama>=0.3.0
+
+# Data / utils
+pandas>=2.2.0
+scikit-learn>=1.4.0
+
+# Tests
+pytest>=8.0.0

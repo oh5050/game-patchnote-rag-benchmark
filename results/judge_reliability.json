@@ -1,0 +1,101 @@
+{
+  "per_axis": {
+    "correctness": {
+      "agree": 13,
+      "total": 15,
+      "pct": 86.7
+    },
+    "faithfulness": {
+      "agree": 11,
+      "total": 15,
+      "pct": 73.3
+    },
+    "hallucination": {
+      "agree": 4,
+      "total": 5,
+      "pct": 80.0
+    }
+  },
+  "by_method": {
+    "rule": {
+      "agree": 23,
+      "total": 25,
+      "pct": 92.0
+    },
+    "llm": {
+      "agree": 5,
+      "total": 10,
+      "pct": 50.0
+    }
+  },
+  "overall": {
+    "agree": 28,
+    "total": 35,
+    "pct": 80.0
+  },
+  "mismatches": [
+    {
+      "qid": "q003",
+      "axis": "correctness",
+      "human_label": "correct",
+      "expected_verdict": "yes",
+      "judge_verdict": "no",
+      "judge_reason": "규칙 애매(2/3) → LLM: 핵심 사실이 다르다: 패치 정보와 쿨감 세팅 변경에 대한 설명이 다름",
+      "method": "llm"
+    },
+    {
+      "qid": "q003",
+      "axis": "faithfulness",
+      "human_label": "correct",
+      "expected_verdict": "yes",
+      "judge_verdict": "no",
+      "judge_reason": "오버랩 애매(0.50) → LLM: 답변에 시즌2 밸런스 패치와 관련된 정보는 없음",
+      "method": "llm"
+    },
+    {
+      "qid": "q006",
+      "axis": "correctness",
+      "human_label": "correct",
+      "expected_verdict": "yes",
+      "judge_verdict": "no",
+      "judge_reason": "규칙 애매(2/3) → LLM: 베른하르트의 스카이폴 엣지 최종 데미지 증가율 변경 정보와 상관없음",
+      "method": "llm"
+    },
+    {
+      "qid": "q006",
+      "axis": "faithfulness",
+      "human_label": "correct",
+      "expected_verdict": "yes",
+      "judge_verdict": "no",
+      "judge_reason": "오버랩 애매(0.42) → LLM: 주어진 문서에 베른하르트의 스카이폴 엣지 스킬 최종 데미지 증가율 변경 정보 없음",
+      "method": "llm"
+    },
+    {
+      "qid": "q009",
+      "axis": "hallucination",
+      "human_label": "yes",
+      "expected_verdict": "yes",
+      "judge_verdict": "no",
+      "judge_reason": "규칙 게이트 미충족: A=False[], B=False(정답수치 ['40초'] 중 [] 포함) → LLM: ",
+      "method": "llm"
+    },
+    {
+      "qid": "q012",
+      "axis": "faithfulness",
+      "human_label": "correct",
+      "expected_verdict": "yes",
+      "judge_verdict": "no",
+      "judge_reason": "context 어휘 오버랩 0.20 (<= 0.3)",
+      "method": "rule"
+    },
+    {
+      "qid": "q015",
+      "axis": "faithfulness",
+      "human_label": "correct",
+      "expected_verdict": "yes",
+      "judge_verdict": "no",
+      "judge_reason": "context 어휘 오버랩 0.30 (<= 0.3)",
+      "method": "rule"
+    }
+  ]
+}

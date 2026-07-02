@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+.pytest_cache/
+
+# HuggingFace / 모델 캐시
+.cache/
+models/
+
+# 대용량/재생성 가능한 로컬 아티팩트
+# (주의: .gitignore 는 줄 끝 인라인 주석을 지원하지 않으므로 주석은 별도 줄에)
+# 임베딩 .npz 캐시 (모델명 기준 재계산 가능)
+results/cache/
+# FAISS 인덱스 (corpus.faiss, corpus.doc_ids.json)
+results/index/
+*.npz
+*.faiss
+*.index
+
+# 포함 대상 명시: 코드, data/, judges/, 주요 결과 json 은 커밋한다.
+# results/ 하위 json(search_eval.json, judge_reliability.json,
+# retrieval.json, generation.json, answer_eval.json 등)은 추적된다.
+
+# OS / IDE
+.DS_Store
+.idea/
+.vscode/

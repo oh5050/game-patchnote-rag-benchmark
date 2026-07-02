@@ -1,0 +1,202 @@
+[
+  {
+    "qid": "q001",
+    "question": "카이린의 궁극기 이름은 무엇인가?",
+    "gold_answer": "카이린의 궁극기 이름은 '빙하의 심판'이다.",
+    "gold_answer_keywords": ["빙하의 심판", "궁극기"],
+    "answer_type": "fact",
+    "valid_period": "post_patch",
+    "difficulty": "easy",
+    "human_label": {
+      "correctness": "correct",
+      "faithfulness": "correct"
+    }
+  },
+  {
+    "qid": "q002",
+    "question": "카이린의 패시브 빙결을 발동시키려면 한기 스택이 몇 개 필요하고, 그 스택을 가장 빠르게 쌓게 해주는 아이템은 무엇인가?",
+    "gold_answer": "패시브 '한기'는 스택 5회가 누적되면 빙결이 발동하며, 아이템 '서리송곳니'가 스택을 2배로 적립해 가장 빠르게 쌓게 해준다.",
+    "gold_answer_keywords": ["5", "서리송곳니"],
+    "answer_type": "multi_hop",
+    "valid_period": "post_patch",
+    "difficulty": "medium",
+    "human_label": {
+      "correctness": "correct",
+      "faithfulness": "correct"
+    }
+  },
+  {
+    "qid": "q003",
+    "question": "카이린 궁극기 쿨다운이 100초인데, 이걸 전제로 궁극기를 최대한 자주 쓰는 세팅을 알려줘.",
+    "gold_answer": "그 정보는 이제 유효하지 않다. 시즌2 패치로 '빙하의 심판'의 기본 쿨다운은 100초에서 120초로 늘어났고 빙결 지속도 3초에서 2초로 줄었다. 따라서 현재 기준(120초)을 전제로 쿨감 세팅을 잡아야 한다.",
+    "gold_answer_keywords": ["120초", "패치", "바뀌"],
+    "answer_type": "outdated_trap",
+    "valid_period": "post_patch",
+    "difficulty": "hard",
+    "human_label": {
+      "correctness": "correct",
+      "faithfulness": "correct",
+      "hallucination": "no"
+    }
+  },
+  {
+    "qid": "q004",
+    "question": "베른하르트의 6차 오리진 스킬 이름은 무엇인가?",
+    "gold_answer": "베른하르트의 6차 오리진 스킬 이름은 '스카이폴 엣지'다.",
+    "gold_answer_keywords": ["스카이폴 엣지", "오리진"],
+    "answer_type": "fact",
+    "valid_period": "post_patch",
+    "difficulty": "easy",
+    "human_label": {
+      "correctness": "correct",
+      "faithfulness": "correct"
+    }
+  },
+  {
+    "qid": "q005",
+    "question": "베른하르트의 5차 스킬을 발동시키려면 격노 스택이 몇 개 필요하고, 그 스택을 가장 빠르게 쌓게 해주는 하이퍼 스킬은 무엇인가?",
+    "gold_answer": "5차 '레이지 인그레이빙'은 격노 스택 8회가 누적되면 방어율 무시가 발동하며, 하이퍼 '워크라이 오스'가 스택 적립을 2배로 해 가장 빠르게 쌓게 해준다.",
+    "gold_answer_keywords": ["8", "워크라이 오스"],
+    "answer_type": "multi_hop",
+    "valid_period": "post_patch",
+    "difficulty": "medium",
+    "human_label": {
+      "correctness": "correct",
+      "faithfulness": "correct"
+    }
+  },
+  {
+    "qid": "q006",
+    "question": "베른하르트의 스카이폴 엣지 최종 데미지 증가가 40%인데, 이 40%를 전제로 딜 세팅을 짜줘.",
+    "gold_answer": "그 정보는 이제 유효하지 않다. 시즌2 패치로 '스카이폴 엣지'의 최종 데미지 증가가 40%에서 55%로 상향되었다. 따라서 현재 기준(55%)을 전제로 딜 세팅을 잡아야 한다.",
+    "gold_answer_keywords": ["55%", "패치", "상향"],
+    "answer_type": "outdated_trap",
+    "valid_period": "post_patch",
+    "difficulty": "hard",
+    "human_label": {
+      "correctness": "correct",
+      "faithfulness": "correct",
+      "hallucination": "no"
+    }
+  },
+  {
+    "qid": "q007",
+    "question": "셀레스티아의 6차 오리진 스킬 이름은 무엇인가?",
+    "gold_answer": "셀레스티아의 6차 오리진 스킬 이름은 '아스트랄 카타클리즘'이다.",
+    "gold_answer_keywords": ["아스트랄 카타클리즘", "오리진"],
+    "answer_type": "fact",
+    "valid_period": "post_patch",
+    "difficulty": "easy",
+    "human_label": {
+      "correctness": "correct",
+      "faithfulness": "correct"
+    }
+  },
+  {
+    "qid": "q008",
+    "question": "셀레스티아의 5차 스킬을 발동시키려면 원소 마크가 몇 개 필요하고, 그 중첩을 가장 빠르게 쌓게 해주는 하이퍼 스킬은 무엇인가?",
+    "gold_answer": "5차 '엘리멘탈 레조넌스'는 원소 마크 6개가 중첩되면 속성 관통이 발동하며, 하이퍼 '매나 서지'가 중첩을 2배로 해 가장 빠르게 쌓게 해준다.",
+    "gold_answer_keywords": ["6", "매나 서지"],
+    "answer_type": "multi_hop",
+    "valid_period": "post_patch",
+    "difficulty": "medium",
+    "human_label": {
+      "correctness": "correct",
+      "faithfulness": "correct"
+    }
+  },
+  {
+    "qid": "q009",
+    "question": "셀레스티아의 아스트랄 카타클리즘 지속시간이 30초인데, 이 30초를 전제로 성역 운영법을 알려줘.",
+    "gold_answer": "그 정보는 이제 유효하지 않다. 시즌2 패치로 '아스트랄 카타클리즘'의 지속시간이 30초에서 40초로 증가했다. 따라서 현재 기준(40초)을 전제로 운영해야 한다.",
+    "gold_answer_keywords": ["40초", "패치", "증가"],
+    "answer_type": "outdated_trap",
+    "valid_period": "post_patch",
+    "difficulty": "hard",
+    "human_label": {
+      "correctness": "incorrect",
+      "faithfulness": "correct",
+      "hallucination": "yes"
+    }
+  },
+  {
+    "qid": "q010",
+    "question": "실비아의 6차 오리진 스킬 이름은 무엇인가?",
+    "gold_answer": "실비아의 6차 오리진 스킬 이름은 '템페스트 레인'이다.",
+    "gold_answer_keywords": ["템페스트 레인", "오리진"],
+    "answer_type": "fact",
+    "valid_period": "post_patch",
+    "difficulty": "easy",
+    "human_label": {
+      "correctness": "correct",
+      "faithfulness": "correct"
+    }
+  },
+  {
+    "qid": "q011",
+    "question": "실비아의 5차 스킬을 발동시키려면 조준 스택이 몇 개 필요하고, 그 스택을 가장 빠르게 쌓게 해주는 하이퍼 스킬은 무엇인가?",
+    "gold_answer": "5차 '헌터스 포커스'는 조준 스택 7개가 누적되면 관통 사격이 발동하며, 하이퍼 '호크 사이트'가 스택 적립을 2배로 해 가장 빠르게 쌓게 해준다.",
+    "gold_answer_keywords": ["7", "호크 사이트"],
+    "answer_type": "multi_hop",
+    "valid_period": "post_patch",
+    "difficulty": "medium",
+    "human_label": {
+      "correctness": "correct",
+      "faithfulness": "correct"
+    }
+  },
+  {
+    "qid": "q012",
+    "question": "실비아의 템페스트 레인 치명타 확률 증가가 25%인데, 이 25%를 전제로 치명타 빌드를 짜줘.",
+    "gold_answer": "그 정보는 이제 유효하지 않다. 시즌2 패치로 '템페스트 레인'의 치명타 확률 증가가 25%에서 35%로 상향되었다. 따라서 현재 기준(35%)을 전제로 빌드를 잡아야 한다.",
+    "gold_answer_keywords": ["35%", "패치", "상향"],
+    "answer_type": "outdated_trap",
+    "valid_period": "post_patch",
+    "difficulty": "hard",
+    "human_label": {
+      "correctness": "incorrect",
+      "faithfulness": "correct",
+      "hallucination": "no"
+    }
+  },
+  {
+    "qid": "q013",
+    "question": "카이든의 6차 오리진 스킬 이름은 무엇인가?",
+    "gold_answer": "카이든의 6차 오리진 스킬 이름은 '섀도우 이클립스'다.",
+    "gold_answer_keywords": ["섀도우 이클립스", "오리진"],
+    "answer_type": "fact",
+    "valid_period": "post_patch",
+    "difficulty": "easy",
+    "human_label": {
+      "correctness": "correct",
+      "faithfulness": "correct"
+    }
+  },
+  {
+    "qid": "q014",
+    "question": "카이든의 5차 스킬을 발동시키려면 중독 낙인이 몇 개 필요하고, 그 중첩을 가장 빠르게 쌓게 해주는 하이퍼 스킬은 무엇인가?",
+    "gold_answer": "5차 '베놈 브랜드'는 중독 낙인 9개가 중첩되면 즉사 확률이 발동하며, 하이퍼 '페이탈 마크'가 중첩을 2배로 해 가장 빠르게 쌓게 해준다.",
+    "gold_answer_keywords": ["9", "페이탈 마크"],
+    "answer_type": "multi_hop",
+    "valid_period": "post_patch",
+    "difficulty": "medium",
+    "human_label": {
+      "correctness": "correct",
+      "faithfulness": "correct"
+    }
+  },
+  {
+    "qid": "q015",
+    "question": "카이든의 섀도우 이클립스 재사용 대기시간이 60초인데, 이 60초를 전제로 진입 타이밍을 잡아줘.",
+    "gold_answer": "그 정보는 이제 유효하지 않다. 시즌2 패치로 '섀도우 이클립스'의 재사용 대기시간이 60초에서 45초로 단축되었다. 따라서 현재 기준(45초)을 전제로 타이밍을 잡아야 한다.",
+    "gold_answer_keywords": ["45초", "패치", "단축"],
+    "answer_type": "outdated_trap",
+    "valid_period": "post_patch",
+    "difficulty": "hard",
+    "human_label": {
+      "correctness": "correct",
+      "faithfulness": "correct",
+      "hallucination": "no"
+    }
+  }
+]
