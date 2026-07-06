@@ -25,6 +25,11 @@ results/index/
 # results/ 하위 json(search_eval.json, judge_reliability.json,
 # retrieval.json, generation.json, answer_eval.json 등)은 추적된다.
 
+# 로컬 탐색용 실험 스크립트/산출물 (예: QLoRA 가동 확인).
+# judge SLM 파인튜닝은 보류 확정 — 저장소/README 는 기존 완결 상태를 유지하고
+# 이 폴더는 로컬에만 보관한다.
+experiments/
+
 # OS / IDE
 .DS_Store
 .idea/
