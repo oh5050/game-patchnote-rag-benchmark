@@ -1,4 +1,14 @@
 {
+  "judgment_structure": {
+    "num_questions": 15,
+    "judgments_per_axis": {
+      "correctness": 15,
+      "faithfulness": 15,
+      "hallucination": 5
+    },
+    "total_judgments": 35,
+    "note": "총 판정 수 = correctness(15문항) + faithfulness(15문항) + hallucination(outdated_trap 5문항만) = 15 + 15 + 5 = 35건. by_method 의 rule+llm 분모 합도 동일 35건(같은 판정을 방법 기준으로 재분할)."
+  },
   "per_axis": {
     "correctness": {
       "agree": 13,

@@ -307,6 +307,276 @@
     "ndcg@5": 0.904585121026291,
     "mrr": 1.0
   },
+  "aggregate": {
+    "hit@1": {
+      "num": 15,
+      "den": 15,
+      "value": 1.0
+    },
+    "recall@1": {
+      "num": 15,
+      "den": 30,
+      "value": 0.5
+    },
+    "ndcg@1": {
+      "num": 12.0,
+      "den": 15,
+      "value": 0.8
+    },
+    "hit@2": {
+      "num": 15,
+      "den": 15,
+      "value": 1.0
+    },
+    "recall@2": {
+      "num": 26,
+      "den": 30,
+      "value": 0.8666666666666667
+    },
+    "ndcg@2": {
+      "num": 12.24,
+      "den": 15,
+      "value": 0.8159874977712087
+    },
+    "hit@3": {
+      "num": 15,
+      "den": 15,
+      "value": 1.0
+    },
+    "recall@3": {
+      "num": 27,
+      "den": 30,
+      "value": 0.9
+    },
+    "ndcg@3": {
+      "num": 12.62,
+      "den": 15,
+      "value": 0.8413270822189376
+    },
+    "hit@5": {
+      "num": 15,
+      "den": 15,
+      "value": 1.0
+    },
+    "recall@5": {
+      "num": 30,
+      "den": 30,
+      "value": 1.0
+    },
+    "ndcg@5": {
+      "num": 13.57,
+      "den": 15,
+      "value": 0.904585121026291
+    },
+    "mrr": {
+      "num": 15.0,
+      "den": 15,
+      "value": 1.0
+    }
+  },
+  "by_type": {
+    "fact": {
+      "hit@1": {
+        "num": 5,
+        "den": 5,
+        "value": 1.0
+      },
+      "recall@1": {
+        "num": 5,
+        "den": 10,
+        "value": 0.5
+      },
+      "ndcg@1": {
+        "num": 2.5,
+        "den": 5,
+        "value": 0.5
+      },
+      "hit@2": {
+        "num": 5,
+        "den": 5,
+        "value": 1.0
+      },
+      "recall@2": {
+        "num": 6,
+        "den": 10,
+        "value": 0.6
+      },
+      "ndcg@2": {
+        "num": 2.38,
+        "den": 5,
+        "value": 0.4760187533431869
+      },
+      "hit@3": {
+        "num": 5,
+        "den": 5,
+        "value": 1.0
+      },
+      "recall@3": {
+        "num": 7,
+        "den": 10,
+        "value": 0.7
+      },
+      "ndcg@3": {
+        "num": 2.76,
+        "den": 5,
+        "value": 0.5520375066863737
+      },
+      "hit@5": {
+        "num": 5,
+        "den": 5,
+        "value": 1.0
+      },
+      "recall@5": {
+        "num": 10,
+        "den": 10,
+        "value": 1.0
+      },
+      "ndcg@5": {
+        "num": 3.71,
+        "den": 5,
+        "value": 0.7418116231084335
+      },
+      "mrr": {
+        "num": 5.0,
+        "den": 5,
+        "value": 1.0
+      }
+    },
+    "multi_hop": {
+      "hit@1": {
+        "num": 5,
+        "den": 5,
+        "value": 1.0
+      },
+      "recall@1": {
+        "num": 5,
+        "den": 10,
+        "value": 0.5
+      },
+      "ndcg@1": {
+        "num": 5.0,
+        "den": 5,
+        "value": 1.0
+      },
+      "hit@2": {
+        "num": 5,
+        "den": 5,
+        "value": 1.0
+      },
+      "recall@2": {
+        "num": 10,
+        "den": 10,
+        "value": 1.0
+      },
+      "ndcg@2": {
+        "num": 5.0,
+        "den": 5,
+        "value": 1.0
+      },
+      "hit@3": {
+        "num": 5,
+        "den": 5,
+        "value": 1.0
+      },
+      "recall@3": {
+        "num": 10,
+        "den": 10,
+        "value": 1.0
+      },
+      "ndcg@3": {
+        "num": 5.0,
+        "den": 5,
+        "value": 1.0
+      },
+      "hit@5": {
+        "num": 5,
+        "den": 5,
+        "value": 1.0
+      },
+      "recall@5": {
+        "num": 10,
+        "den": 10,
+        "value": 1.0
+      },
+      "ndcg@5": {
+        "num": 5.0,
+        "den": 5,
+        "value": 1.0
+      },
+      "mrr": {
+        "num": 5.0,
+        "den": 5,
+        "value": 1.0
+      }
+    },
+    "outdated_trap": {
+      "hit@1": {
+        "num": 5,
+        "den": 5,
+        "value": 1.0
+      },
+      "recall@1": {
+        "num": 5,
+        "den": 10,
+        "value": 0.5
+      },
+      "ndcg@1": {
+        "num": 4.5,
+        "den": 5,
+        "value": 0.9
+      },
+      "hit@2": {
+        "num": 5,
+        "den": 5,
+        "value": 1.0
+      },
+      "recall@2": {
+        "num": 10,
+        "den": 10,
+        "value": 1.0
+      },
+      "ndcg@2": {
+        "num": 4.86,
+        "den": 5,
+        "value": 0.9719437399704395
+      },
+      "hit@3": {
+        "num": 5,
+        "den": 5,
+        "value": 1.0
+      },
+      "recall@3": {
+        "num": 10,
+        "den": 10,
+        "value": 1.0
+      },
+      "ndcg@3": {
+        "num": 4.86,
+        "den": 5,
+        "value": 0.9719437399704395
+      },
+      "hit@5": {
+        "num": 5,
+        "den": 5,
+        "value": 1.0
+      },
+      "recall@5": {
+        "num": 10,
+        "den": 10,
+        "value": 1.0
+      },
+      "ndcg@5": {
+        "num": 4.86,
+        "den": 5,
+        "value": 0.9719437399704395
+      },
+      "mrr": {
+        "num": 5.0,
+        "den": 5,
+        "value": 1.0
+      }
+    }
+  },
   "config": {
     "embedding_model": "intfloat/multilingual-e5-small",
     "k": 5

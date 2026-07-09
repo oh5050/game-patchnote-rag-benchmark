@@ -11,6 +11,17 @@
 # 라벨→verdict 매핑:
 #   - correctness/faithfulness: "correct"→"yes", 그 외→"no"
 #   - hallucination: 라벨이 이미 yes/no 의미(no=환각 없음) → 그대로 사용
+#
+# 판정 단위(총 35건이 나오는 구조 — 계산기 없이 읽을 수 있도록 명시):
+#   - 15문항 전체가 correctness 축 판정 대상          → 15건
+#   - 15문항 전체가 faithfulness 축 판정 대상          → 15건
+#   - hallucination 축은 outdated_trap 문항(5개)만 대상 → 5건
+#   - 합계: 15 + 15 + 5 = 35건 (report["judgment_structure"] 에 이 분해를 그대로 저장)
+#   - 이 35건은 rule/llm 두 method 로 나뉘어 판정됐고, by_method 의 분모 합도
+#     25(rule) + 10(llm) = 35 로 위와 일치한다(같은 35건을 축 기준/방법 기준으로
+#     두 번 나눠 센 것일 뿐, 서로 다른 모집단이 아니다).
+# n=15 파일럿 주의: 총 35건 중 일부 축(예: hallucination=5건)은 표본이 매우 작아
+#   1건의 불일치가 20%p 를 흔든다. pct 는 참고용이고 항상 agree/total 을 함께 본다.
 # 의존관계:
 #   - src.config(경로). 외부 API 없음.
 # 사용처: 직접 실행 python -m src.evaluation.judge_reliability
@@ -100,8 +111,24 @@ def compute_reliability(questions: list[dict], answer_eval: list[dict]) -> dict:
     def _finalize(counters: dict) -> dict:
         return {k: {**v, "pct": _pct(v["agree"], v["total"])} for k, v in counters.items()}
 
+    per_axis_final = _finalize(per_axis)
+    # 판정 단위 구조를 그대로 노출: 15(correctness) + 15(faithfulness) + 5(hallucination) = 35.
+    judgment_structure = {
+        "num_questions": 15,
+        "judgments_per_axis": {axis: per_axis[axis]["total"] for axis in AXES},
+        "total_judgments": sum(per_axis[axis]["total"] for axis in AXES),
+        "note": (
+            "총 판정 수 = correctness(15문항) + faithfulness(15문항) + "
+            "hallucination(outdated_trap 5문항만) = "
+            + " + ".join(str(per_axis[axis]["total"]) for axis in AXES)
+            + f" = {sum(per_axis[axis]['total'] for axis in AXES)}건. "
+            "by_method 의 rule+llm 분모 합도 동일 35건(같은 판정을 방법 기준으로 재분할)."
+        ),
+    }
+
     return {
-        "per_axis": _finalize(per_axis),
+        "judgment_structure": judgment_structure,
+        "per_axis": per_axis_final,
         "by_method": _finalize(by_method),
         "overall": {**overall, "pct": _pct(overall["agree"], overall["total"])},
         "mismatches": mismatches,
@@ -109,16 +136,19 @@ def compute_reliability(questions: list[dict], answer_eval: list[dict]) -> dict:
 
 
 def _print_report(report: dict) -> None:
-    print("== 축별 일치율 (agreement) ==")
+    js = report["judgment_structure"]
+    print(f"== 판정 단위: {js['note']} ==")
+
+    print("\n== 축별 일치율 (agreement) ==  * value% (agree/total) — n 이 작을수록 참고용")
     for axis, c in report["per_axis"].items():
-        print(f"  {axis:<14} {c['agree']}/{c['total']}  ({c['pct']}%)")
+        print(f"  {axis:<14} {c['pct']}%  ({c['agree']}/{c['total']})")
 
     print("\n== 방법별 일치율 (가설: rule > llm) ==")
     for method, c in report["by_method"].items():
-        print(f"  {method:<5} {c['agree']}/{c['total']}  ({c['pct']}%)")
+        print(f"  {method:<5} {c['pct']}%  ({c['agree']}/{c['total']})")
 
     o = report["overall"]
-    print(f"\n== 전체 == {o['agree']}/{o['total']}  ({o['pct']}%)")
+    print(f"\n== 전체 == {o['pct']}%  ({o['agree']}/{o['total']})")
 
     print("\n== 불일치 케이스 ==")
     if not report["mismatches"]:
