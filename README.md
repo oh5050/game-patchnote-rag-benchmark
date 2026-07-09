@@ -106,9 +106,9 @@ python -m src.evaluation.judge_reliability
   | multi_hop | 1.00 (10/10) | 1.00 (5.00/5) |
   | outdated_trap | 1.00 (10/10) | 0.90 (4.50/5) |
   | **전체(ALL)** | **0.87 (26/30)** | **0.80 (12.00/15)** |
-  *(recall@2 = top-2 내 회수 gold 문서 수 / 전체 gold 문서 수. nDCG@1 = 문항별 nDCG@1 값의 합 /
-  문항 수. `python -m src.evaluation.search_eval` 실행 시 유형별 표가 이 형식으로 그대로 출력·저장된다.)*
-  - fact가 낮은 이유로 "스킬명을 묻는 질문에서 pre/post 문서의 문장이 거의 같아 검색이 구버전
+- recall@2 = top-2 내 회수 gold 문서 수 / 전체 gold 문서 수. nDCG@1 = 문항별 nDCG@1 값의 합 /
+  문항 수. `python -m src.evaluation.search_eval` 실행 시 유형별 표가 이 형식으로 그대로 출력·저장된다.
+- fact가 낮은 이유로 "스킬명을 묻는 질문에서 pre/post 문서의 문장이 거의 같아 검색이 구버전
     문서를 상위로 올린다"는 진단을 세웠고, `scripts/run_temporal_ablation.py` 로 이 진단을
     검증했다(아래 Temporal Ablation 절 참고) — **부분적으로만 지지됨**: top-2 회수는
     개선(0.60→0.80)되지만 rank-1(nDCG@1=0.50)은 시점 표기만으로 교정되지 않았다.
