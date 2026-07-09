@@ -1,0 +1,250 @@
+{
+  "config": {
+    "embedding_model": "intfloat/multilingual-e5-small",
+    "k": 5,
+    "seed": 42,
+    "device": "cpu",
+    "eval_ks": [
+      1,
+      2,
+      3,
+      5
+    ]
+  },
+  "conditions": [
+    "baseline",
+    "temporal_marked",
+    "temporal_marked_query_hint"
+  ],
+  "period_marker": {
+    "post_patch": "[패치 이후 기준] ",
+    "pre_patch": "[패치 이전 기준] "
+  },
+  "query_hint": "[현재 기준] ",
+  "comparison": {
+    "fact": {
+      "recall@2": {
+        "baseline": {
+          "num": 6,
+          "den": 10,
+          "value": 0.6
+        },
+        "temporal_marked": {
+          "num": 8,
+          "den": 10,
+          "value": 0.8
+        },
+        "temporal_marked_query_hint": {
+          "num": 8,
+          "den": 10,
+          "value": 0.8
+        },
+        "delta_marked_vs_baseline": 0.2,
+        "delta_hint_vs_marked": 0.0
+      },
+      "ndcg@1": {
+        "baseline": {
+          "num": 2.5,
+          "den": 5,
+          "value": 0.5
+        },
+        "temporal_marked": {
+          "num": 2.5,
+          "den": 5,
+          "value": 0.5
+        },
+        "temporal_marked_query_hint": {
+          "num": 2.5,
+          "den": 5,
+          "value": 0.5
+        },
+        "delta_marked_vs_baseline": 0.0,
+        "delta_hint_vs_marked": 0.0
+      }
+    },
+    "multi_hop": {
+      "recall@2": {
+        "baseline": {
+          "num": 10,
+          "den": 10,
+          "value": 1.0
+        },
+        "temporal_marked": {
+          "num": 10,
+          "den": 10,
+          "value": 1.0
+        },
+        "temporal_marked_query_hint": {
+          "num": 10,
+          "den": 10,
+          "value": 1.0
+        },
+        "delta_marked_vs_baseline": 0.0,
+        "delta_hint_vs_marked": 0.0
+      },
+      "ndcg@1": {
+        "baseline": {
+          "num": 5.0,
+          "den": 5,
+          "value": 1.0
+        },
+        "temporal_marked": {
+          "num": 5.0,
+          "den": 5,
+          "value": 1.0
+        },
+        "temporal_marked_query_hint": {
+          "num": 5.0,
+          "den": 5,
+          "value": 1.0
+        },
+        "delta_marked_vs_baseline": 0.0,
+        "delta_hint_vs_marked": 0.0
+      }
+    },
+    "outdated_trap": {
+      "recall@2": {
+        "baseline": {
+          "num": 10,
+          "den": 10,
+          "value": 1.0
+        },
+        "temporal_marked": {
+          "num": 10,
+          "den": 10,
+          "value": 1.0
+        },
+        "temporal_marked_query_hint": {
+          "num": 10,
+          "den": 10,
+          "value": 1.0
+        },
+        "delta_marked_vs_baseline": 0.0,
+        "delta_hint_vs_marked": 0.0
+      },
+      "ndcg@1": {
+        "baseline": {
+          "num": 4.5,
+          "den": 5,
+          "value": 0.9
+        },
+        "temporal_marked": {
+          "num": 4.0,
+          "den": 5,
+          "value": 0.8
+        },
+        "temporal_marked_query_hint": {
+          "num": 4.0,
+          "den": 5,
+          "value": 0.8
+        },
+        "delta_marked_vs_baseline": -0.1,
+        "delta_hint_vs_marked": 0.0
+      }
+    },
+    "ALL": {
+      "recall@2": {
+        "baseline": {
+          "num": 26,
+          "den": 30,
+          "value": 0.8666666666666667
+        },
+        "temporal_marked": {
+          "num": 28,
+          "den": 30,
+          "value": 0.9333333333333333
+        },
+        "temporal_marked_query_hint": {
+          "num": 28,
+          "den": 30,
+          "value": 0.9333333333333333
+        },
+        "delta_marked_vs_baseline": 0.0667,
+        "delta_hint_vs_marked": 0.0
+      },
+      "ndcg@1": {
+        "baseline": {
+          "num": 12.0,
+          "den": 15,
+          "value": 0.8
+        },
+        "temporal_marked": {
+          "num": 11.5,
+          "den": 15,
+          "value": 0.7666666666666667
+        },
+        "temporal_marked_query_hint": {
+          "num": 11.5,
+          "den": 15,
+          "value": 0.7666666666666667
+        },
+        "delta_marked_vs_baseline": -0.0333,
+        "delta_hint_vs_marked": 0.0
+      }
+    }
+  },
+  "macro": {
+    "baseline": {
+      "hit@1": 1.0,
+      "recall@1": 0.5,
+      "ndcg@1": 0.8,
+      "hit@2": 1.0,
+      "recall@2": 0.8666666666666667,
+      "ndcg@2": 0.8159874977712087,
+      "hit@3": 1.0,
+      "recall@3": 0.9,
+      "ndcg@3": 0.8413270822189376,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "ndcg@5": 0.904585121026291,
+      "mrr": 1.0
+    },
+    "temporal_marked": {
+      "hit@1": 1.0,
+      "recall@1": 0.5,
+      "ndcg@1": 0.7666666666666667,
+      "hit@2": 1.0,
+      "recall@2": 0.9333333333333333,
+      "ndcg@2": 0.8705854021795235,
+      "hit@3": 1.0,
+      "recall@3": 1.0,
+      "ndcg@3": 0.9212645710749814,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "ndcg@5": 0.9212645710749814,
+      "mrr": 1.0
+    },
+    "temporal_marked_query_hint": {
+      "hit@1": 1.0,
+      "recall@1": 0.5,
+      "ndcg@1": 0.7666666666666667,
+      "hit@2": 1.0,
+      "recall@2": 0.9333333333333333,
+      "ndcg@2": 0.8705854021795235,
+      "hit@3": 1.0,
+      "recall@3": 0.9666666666666667,
+      "ndcg@3": 0.8959249866272524,
+      "hit@5": 1.0,
+      "recall@5": 1.0,
+      "ndcg@5": 0.9155303653827738,
+      "mrr": 1.0
+    }
+  },
+  "diagnosis_1_doc_marker": {
+    "headline": "진단 부분 지지",
+    "fact_recall@2_delta": 0.2,
+    "fact_ndcg@1_delta": 0.0,
+    "regressions": [
+      "outdated_trap ndcg@1 -0.10",
+      "ALL ndcg@1 -0.03"
+    ],
+    "text": "[진단 부분 지지] fact recall@2 개선(+0.20), fact nDCG@1 변화 없음(0.00). 시점 표기로 fact 의 recall@2 는 개선됐으나 nDCG@1(rank-1)은 그대로 → 두 번째 gold 문서는 top-2 로 더 끌려왔지만, 최상위(rank-1)에는 여전히 구버전(pre_patch)이 앉아 있다. | 부작용(회귀, baseline→temporal_marked): outdated_trap ndcg@1 -0.10, ALL ndcg@1 -0.03."
+  },
+  "estimate_2_query_hint": {
+    "headline": "추정 반증",
+    "fact_recall@2_delta": 0.0,
+    "fact_ndcg@1_delta": 0.0,
+    "regressions": [],
+    "text": "[추정 반증] fact recall@2(hint vs marked) 변화 없음(0.00), fact nDCG@1(hint vs marked) 변화 없음(0.00). 문서 표기는 고정한 채 쿼리에만 시점 힌트를 추가했지만 fact 의 nDCG@1(rank-1)에 변화가 없었다 → '쿼리에 시점 단서가 없어서'라는 추정은 **틀렸다**. rank-1 교정 실패의 원인은 쿼리 측 시점 단서 부재가 아니라 다른 요인(예: 임베딩이 '이름/스킬명' 질의에서 시점 토큰보다 개체명 매칭에 더 의존하는 경향, 혹은 시점 힌트가 짧은 질문 안에서 상대적으로 약한 신호가 되는 점 등)일 가능성이 높다."
+  }
+}
