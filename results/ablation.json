@@ -1,0 +1,1717 @@
+{
+  "config": {
+    "gen_model": "qwen2.5:3b",
+    "judge_model": "qwen2.5:3b",
+    "judge_mode": "hybrid",
+    "seed": 42,
+    "k": 5,
+    "embedding_model": "intfloat/multilingual-e5-small"
+  },
+  "conditions": [
+    "no_context",
+    "gold_context",
+    "retrieved_context"
+  ],
+  "label_definitions": {
+    "ok": "gold·retrieved 모두 정답(시스템 정상).",
+    "generation_failure": "gold 오답이고 정답수치(post)조차 답변에 없음(진짜 생성 실패).",
+    "judge_uncertain": "gold 답변에 정답수치는 포함됐으나 correctness=no 로 채점됨(채점 오판).",
+    "retrieval_failure": "gold 정답, retrieved 오답(검색 문제).",
+    "question_leaked_outdated_value": "outdated_trap 에서 no_context 답변이 질문에 포함된 구버전 값을 그대로 반복함(합성 데이터이므로 사전 지식이 아니라 '질문 누출'로 해석).",
+    "fabricated_value": "no_context 답변이 질문에도 문서(corpus)에도 없는 수치를 생성함(구버전 반복/누출과 구별되는 별개의 fabrication 실패 유형).",
+    "parametric_outdated_bias": "[폐기] 합성 데이터 특성상 성립 불가 → question_leaked_outdated_value 로 대체."
+  },
+  "multi_labels": [
+    "question_leaked_outdated_value",
+    "fabricated_value",
+    "judge_uncertain"
+  ],
+  "per_query": [
+    {
+      "qid": "q001",
+      "answer_type": "fact",
+      "question": "카이린의 궁극기 이름은 무엇인가?",
+      "outdated_value": null,
+      "post_value": null,
+      "diagnosis": "ok",
+      "labels": [],
+      "diagnosis_legacy": "ok",
+      "gold_post_value_present": null,
+      "no_context_numeric_check": {
+        "question_values": [],
+        "answer_values": [],
+        "leaked_values": [],
+        "invented_values": [],
+        "fabricated_values": [],
+        "outdated_value_leaked": false,
+        "fabricated": false,
+        "classification": "no_numeric"
+      },
+      "flags": {
+        "no_context_correct": false,
+        "gold_correct": true,
+        "retrieved_correct": true,
+        "all_three_correct": false,
+        "gold_has_post_value": false,
+        "outdated_value_leaked": false,
+        "fabricated": false,
+        "legacy_answered_old": false
+      },
+      "conditions": {
+        "no_context": {
+          "doc_ids": [],
+          "answer": "카이린의 궁극기 이름은 \"파워 오브 더 스파이크\" (Power of the Spike)입니다.",
+          "eval": {
+            "qid": "q001",
+            "answer_type": "fact",
+            "correctness": {
+              "verdict": "no",
+              "reason": "규칙 애매(1/2) → LLM: 핵심 명칭 '빙하의 심판'이 틀리다",
+              "method": "llm"
+            },
+            "faithfulness": {
+              "verdict": "no",
+              "reason": "context 어휘 오버랩 0.00 (<= 0.3)",
+              "method": "rule"
+            }
+          },
+          "correct": false
+        },
+        "gold_context": {
+          "doc_ids": [
+            "doc_g002",
+            "doc_g001"
+          ],
+          "answer": "카이린의 궁극기 이름은 '빙하의 심판'이다. 주어진 문서로는 알 수 없다가, 다른 문서에서 카이린의 궁극기가 '빙하의 심판'이라는 것을 확인할 수 있다.",
+          "eval": {
+            "qid": "q001",
+            "answer_type": "fact",
+            "correctness": {
+              "verdict": "yes",
+              "reason": "gold 키워드 전부 매칭 ['빙하의 심판', '궁극기']",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "no",
+              "reason": "context 어휘 오버랩 0.22 (<= 0.3)",
+              "method": "rule"
+            }
+          },
+          "correct": true
+        },
+        "retrieved_context": {
+          "doc_ids": [
+            "doc_g001",
+            "doc_g002",
+            "doc_g003",
+            "doc_t003",
+            "doc_g004"
+          ],
+          "answer": "카이린의 궁극기 이름은 '빙하의 심판'이다.",
+          "eval": {
+            "qid": "q001",
+            "answer_type": "fact",
+            "correctness": {
+              "verdict": "yes",
+              "reason": "gold 키워드 전부 매칭 ['빙하의 심판', '궁극기']",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "yes",
+              "reason": "context 어휘 오버랩 0.67 (>= 0.6)",
+              "method": "rule"
+            }
+          },
+          "correct": true
+        }
+      }
+    },
+    {
+      "qid": "q002",
+      "answer_type": "multi_hop",
+      "question": "카이린의 패시브 빙결을 발동시키려면 한기 스택이 몇 개 필요하고, 그 스택을 가장 빠르게 쌓게 해주는 아이템은 무엇인가?",
+      "outdated_value": null,
+      "post_value": null,
+      "diagnosis": "ok",
+      "labels": [],
+      "diagnosis_legacy": "ok",
+      "gold_post_value_present": null,
+      "no_context_numeric_check": {
+        "question_values": [],
+        "answer_values": [],
+        "leaked_values": [],
+        "invented_values": [],
+        "fabricated_values": [],
+        "outdated_value_leaked": false,
+        "fabricated": false,
+        "classification": "no_numeric"
+      },
+      "flags": {
+        "no_context_correct": false,
+        "gold_correct": true,
+        "retrieved_correct": true,
+        "all_three_correct": false,
+        "gold_has_post_value": false,
+        "outdated_value_leaked": false,
+        "fabricated": false,
+        "legacy_answered_old": false
+      },
+      "conditions": {
+        "no_context": {
+          "doc_ids": [],
+          "answer": "카이린의 패시브 '빙결'을 발동하려면 5개의 한기가 필요합니다. 이를 가장 빠르게 쌓는 아이템으로는 '아크릴릭 스크린'이 있습니다. 이 아이템은 한기를 얻는데 매우 효과적입니다.",
+          "eval": {
+            "qid": "q002",
+            "answer_type": "multi_hop",
+            "correctness": {
+              "verdict": "no",
+              "reason": "규칙 애매(1/2) → LLM: 핵심 사실인 한기 스택 수와 아이템이 틀림",
+              "method": "llm"
+            },
+            "faithfulness": {
+              "verdict": "no",
+              "reason": "context 어휘 오버랩 0.00 (<= 0.3)",
+              "method": "rule"
+            }
+          },
+          "correct": false
+        },
+        "gold_context": {
+          "doc_ids": [
+            "doc_g003",
+            "doc_g004"
+          ],
+          "answer": "카이린의 빙결 패시브를 발동하려면 한기 스택이 5개 필요하다.\n\n한기 스택을 가장 빠르게 쌓게 해주는 아이템은 '서리송곳니'이다.",
+          "eval": {
+            "qid": "q002",
+            "answer_type": "multi_hop",
+            "correctness": {
+              "verdict": "yes",
+              "reason": "gold 키워드 전부 매칭 ['5', '서리송곳니']",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "no",
+              "reason": "오버랩 애매(0.41) → LLM: 답변에 문서에서 언급되지 않은 정보가 포함되어 있음",
+              "method": "llm"
+            }
+          },
+          "correct": true
+        },
+        "retrieved_context": {
+          "doc_ids": [
+            "doc_g003",
+            "doc_g004",
+            "doc_g001",
+            "doc_w003",
+            "doc_g002"
+          ],
+          "answer": "카이린의 패시브 '한기'는 기본 공격과 스킬로 적에게 5개의 한기 스택을 부여하면 다음 기본 공격으로 대상을 1초간 빙결시키고 추가 마법 피해를 입힌다.\n\n서리송곳니 아이템은 한기 스택이 2배로 적립되므로, 카이린의 패시브 '한기'를 가장 빠르게 쌓게 해준다.",
+          "eval": {
+            "qid": "q002",
+            "answer_type": "multi_hop",
+            "correctness": {
+              "verdict": "yes",
+              "reason": "gold 키워드 전부 매칭 ['5', '서리송곳니']",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "yes",
+              "reason": "context 어휘 오버랩 0.73 (>= 0.6)",
+              "method": "rule"
+            }
+          },
+          "correct": true
+        }
+      }
+    },
+    {
+      "qid": "q003",
+      "answer_type": "outdated_trap",
+      "question": "카이린 궁극기 쿨다운이 100초인데, 이걸 전제로 궁극기를 최대한 자주 쓰는 세팅을 알려줘.",
+      "outdated_value": "100초",
+      "post_value": "120초",
+      "diagnosis": "judge_uncertain",
+      "labels": [
+        "question_leaked_outdated_value",
+        "judge_uncertain"
+      ],
+      "diagnosis_legacy": "generation_failure",
+      "gold_post_value_present": true,
+      "no_context_numeric_check": {
+        "question_values": [
+          "100초"
+        ],
+        "answer_values": [
+          "100초"
+        ],
+        "leaked_values": [
+          "100초"
+        ],
+        "invented_values": [],
+        "fabricated_values": [],
+        "outdated_value_leaked": true,
+        "fabricated": false,
+        "classification": "leaked"
+      },
+      "flags": {
+        "no_context_correct": false,
+        "gold_correct": false,
+        "retrieved_correct": false,
+        "all_three_correct": false,
+        "gold_has_post_value": true,
+        "outdated_value_leaked": true,
+        "fabricated": false,
+        "legacy_answered_old": true
+      },
+      "conditions": {
+        "no_context": {
+          "doc_ids": [],
+          "answer": "궁극기가 100초 동안 쿨다운되는 상황에서 최대한 자주 사용하려면, 카이린은 다른 능력치를 최대한 높이고, 적의 공격을 피하거나 막아야 합니다. 이를 위해 다음과 같은 세팅을 추천합니다:\n\n1. HP(생명력)와 MP(마나)를 최대로 설정하여 궁극기를 사용할 수 있는 시간을 늘립니다.\n2. 스킬 '도살자'의 피해량과 데미지 증가 효과를 최대치로 설정하여 적에게 더 많은 피해를 줄 수 있습니다.\n3. '도살자'와 '도살자(강화)'의 쿨타임을 최소화하여 궁극기를 사용할 수 있는 시간을 늘립니다.\n\n이러한 세팅으로 카이린은 최대한 자주 궁극기를 사용하면서 적에게 피해를 줄 수 있습니다.",
+          "eval": {
+            "qid": "q003",
+            "answer_type": "outdated_trap",
+            "correctness": {
+              "verdict": "no",
+              "reason": "gold 키워드 0/3 매칭",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "no",
+              "reason": "context 어휘 오버랩 0.00 (<= 0.3)",
+              "method": "rule"
+            },
+            "hallucination": {
+              "verdict": "yes",
+              "reason": "규칙 게이트 미충족: A=False[], B=False(정답수치 ['120초'] 중 [] 포함) → LLM: 현재 문서에는 궁극기 쿨다운에 대한 정보가 없음",
+              "method": "llm"
+            }
+          },
+          "correct": false
+        },
+        "gold_context": {
+          "doc_ids": [
+            "doc_g002",
+            "doc_g001"
+          ],
+          "answer": "주어진 문서로는 알 수 없다. 시즌2 밸런스 패치에서 카이린의 궁극기 '빙하의 심판'의 기본 쿨다운이 100초에서 120초로 늘어났기 때문에, 최대한 자주 사용하는 방법은 변경된 정보를 기반으로 수정되어야 한다.",
+          "eval": {
+            "qid": "q003",
+            "answer_type": "outdated_trap",
+            "correctness": {
+              "verdict": "no",
+              "reason": "규칙 애매(2/3) → LLM: 핵심 정보인 '빙하의 심판'의 기본 쿨다운이 100초에서 120초로 변경된 점이 다르다",
+              "method": "llm"
+            },
+            "faithfulness": {
+              "verdict": "no",
+              "reason": "오버랩 애매(0.45) → LLM: 답변에 시즌2 밸런스 패치와 관련된 내용이 없음",
+              "method": "llm"
+            },
+            "hallucination": {
+              "verdict": "no",
+              "reason": "규칙 게이트 통과: A(정정신호)=['패치', '변경'] & B(정답수치)=['120초'] → 환각 아님",
+              "method": "rule"
+            }
+          },
+          "correct": false
+        },
+        "retrieved_context": {
+          "doc_ids": [
+            "doc_g002",
+            "doc_g001",
+            "doc_g003",
+            "doc_m001",
+            "doc_t001"
+          ],
+          "answer": "주어진 문서로는 알 수 없다. 시즌2 밸런스 패치 이후 카이린의 궁극기 '빙하의 심판'의 기본 쿨다운은 120초가 되었다. 이전에는 100초였으나, 이 변경 사항을 고려해야 한다.",
+          "eval": {
+            "qid": "q003",
+            "answer_type": "outdated_trap",
+            "correctness": {
+              "verdict": "no",
+              "reason": "규칙 애매(2/3) → LLM: 핵심 정보인 '빙하의 심판'의 쿨다운이 100초에서 120초로 변경된 점이 다르다",
+              "method": "llm"
+            },
+            "faithfulness": {
+              "verdict": "yes",
+              "reason": "오버랩 애매(0.43) → LLM: ",
+              "method": "llm"
+            },
+            "hallucination": {
+              "verdict": "no",
+              "reason": "규칙 게이트 통과: A(정정신호)=['패치', '변경'] & B(정답수치)=['120초'] → 환각 아님",
+              "method": "rule"
+            }
+          },
+          "correct": false
+        }
+      }
+    },
+    {
+      "qid": "q004",
+      "answer_type": "fact",
+      "question": "베른하르트의 6차 오리진 스킬 이름은 무엇인가?",
+      "outdated_value": null,
+      "post_value": null,
+      "diagnosis": "ok",
+      "labels": [],
+      "diagnosis_legacy": "ok",
+      "gold_post_value_present": null,
+      "no_context_numeric_check": {
+        "question_values": [],
+        "answer_values": [],
+        "leaked_values": [],
+        "invented_values": [],
+        "fabricated_values": [],
+        "outdated_value_leaked": false,
+        "fabricated": false,
+        "classification": "no_numeric"
+      },
+      "flags": {
+        "no_context_correct": false,
+        "gold_correct": true,
+        "retrieved_correct": true,
+        "all_three_correct": false,
+        "gold_has_post_value": false,
+        "outdated_value_leaked": false,
+        "fabricated": false,
+        "legacy_answered_old": false
+      },
+      "conditions": {
+        "no_context": {
+          "doc_ids": [],
+          "answer": "베른하르트의 6단계 오리진 스킬 이름은 알려지지 않았다. 게임 내에서 이 정보는 공개되지 않아 정확한 답변을 드릴 수 없다.",
+          "eval": {
+            "qid": "q004",
+            "answer_type": "fact",
+            "correctness": {
+              "verdict": "no",
+              "reason": "규칙 애매(1/2) → LLM: 핵심 명칭 '스카이폴 엣지'가 틀림",
+              "method": "llm"
+            },
+            "faithfulness": {
+              "verdict": "no",
+              "reason": "context 어휘 오버랩 0.00 (<= 0.3)",
+              "method": "rule"
+            }
+          },
+          "correct": false
+        },
+        "gold_context": {
+          "doc_ids": [
+            "doc_w002",
+            "doc_w001"
+          ],
+          "answer": "베른하르트의 6차 오리진 스킬 이름은 '스카이폴 엣지'다. 주어진 문서로는 알 수 있다.",
+          "eval": {
+            "qid": "q004",
+            "answer_type": "fact",
+            "correctness": {
+              "verdict": "yes",
+              "reason": "gold 키워드 전부 매칭 ['스카이폴 엣지', '오리진']",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "yes",
+              "reason": "오버랩 애매(0.50) → LLM: ",
+              "method": "llm"
+            }
+          },
+          "correct": true
+        },
+        "retrieved_context": {
+          "doc_ids": [
+            "doc_w001",
+            "doc_m001",
+            "doc_w002",
+            "doc_a001",
+            "doc_t001"
+          ],
+          "answer": "베른하르트의 6차 오리진 스킬 이름은 '스카이폴 엣지'다.",
+          "eval": {
+            "qid": "q004",
+            "answer_type": "fact",
+            "correctness": {
+              "verdict": "yes",
+              "reason": "gold 키워드 전부 매칭 ['스카이폴 엣지', '오리진']",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "yes",
+              "reason": "context 어휘 오버랩 0.78 (>= 0.6)",
+              "method": "rule"
+            }
+          },
+          "correct": true
+        }
+      }
+    },
+    {
+      "qid": "q005",
+      "answer_type": "multi_hop",
+      "question": "베른하르트의 5차 스킬을 발동시키려면 격노 스택이 몇 개 필요하고, 그 스택을 가장 빠르게 쌓게 해주는 하이퍼 스킬은 무엇인가?",
+      "outdated_value": null,
+      "post_value": null,
+      "diagnosis": "ok",
+      "labels": [],
+      "diagnosis_legacy": "ok",
+      "gold_post_value_present": null,
+      "no_context_numeric_check": {
+        "question_values": [],
+        "answer_values": [],
+        "leaked_values": [],
+        "invented_values": [],
+        "fabricated_values": [],
+        "outdated_value_leaked": false,
+        "fabricated": false,
+        "classification": "no_numeric"
+      },
+      "flags": {
+        "no_context_correct": false,
+        "gold_correct": true,
+        "retrieved_correct": true,
+        "all_three_correct": false,
+        "gold_has_post_value": false,
+        "outdated_value_leaked": false,
+        "fabricated": false,
+        "legacy_answered_old": false
+      },
+      "conditions": {
+        "no_context": {
+          "doc_ids": [],
+          "answer": "베른하르트의 5차 스킬을 발동하기 위해서는 격노 스택이 10개 필요합니다. 그 중에서 가장 빠르게 격노 스택을 쌓아올리는 하이퍼 스킬은 '격노 히트'입니다.",
+          "eval": {
+            "qid": "q005",
+            "answer_type": "multi_hop",
+            "correctness": {
+              "verdict": "no",
+              "reason": "gold 키워드 0/2 매칭",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "no",
+              "reason": "context 어휘 오버랩 0.00 (<= 0.3)",
+              "method": "rule"
+            }
+          },
+          "correct": false
+        },
+        "gold_context": {
+          "doc_ids": [
+            "doc_w003",
+            "doc_w004"
+          ],
+          "answer": "베른하르트의 5차 스킬 '레이지 인그레이빙'을 발동하기 위해서는 한 대상에게 격노 스택이 8회 누적되어야 한다. 그 중에서 가장 빠르게 격노 스택을 쌓게 해주는 하이퍼 스킬은 '워크라이 오스'이다.",
+          "eval": {
+            "qid": "q005",
+            "answer_type": "multi_hop",
+            "correctness": {
+              "verdict": "yes",
+              "reason": "gold 키워드 전부 매칭 ['8', '워크라이 오스']",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "no",
+              "reason": "오버랩 애매(0.59) → LLM: 답변에 문서와 관련 없는 정보가 포함되어 있음",
+              "method": "llm"
+            }
+          },
+          "correct": true
+        },
+        "retrieved_context": {
+          "doc_ids": [
+            "doc_w003",
+            "doc_w004",
+            "doc_a003",
+            "doc_t004",
+            "doc_m004"
+          ],
+          "answer": "베른하르트의 5차 스킬 '레이지 인그레이빙'을 발동하기 위해서는 격노 스택이 8개 필요하다.\n\n격노 스택을 가장 빠르게 쌓게 해주는 하이퍼 스킬은 '워크라이 오스'이다.",
+          "eval": {
+            "qid": "q005",
+            "answer_type": "multi_hop",
+            "correctness": {
+              "verdict": "yes",
+              "reason": "gold 키워드 전부 매칭 ['8', '워크라이 오스']",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "yes",
+              "reason": "context 어휘 오버랩 0.62 (>= 0.6)",
+              "method": "rule"
+            }
+          },
+          "correct": true
+        }
+      }
+    },
+    {
+      "qid": "q006",
+      "answer_type": "outdated_trap",
+      "question": "베른하르트의 스카이폴 엣지 최종 데미지 증가가 40%인데, 이 40%를 전제로 딜 세팅을 짜줘.",
+      "outdated_value": "40%",
+      "post_value": "55%",
+      "diagnosis": "judge_uncertain",
+      "labels": [
+        "fabricated_value",
+        "judge_uncertain"
+      ],
+      "diagnosis_legacy": "generation_failure",
+      "gold_post_value_present": true,
+      "no_context_numeric_check": {
+        "question_values": [
+          "40%"
+        ],
+        "answer_values": [
+          "140%"
+        ],
+        "leaked_values": [],
+        "invented_values": [
+          "140%"
+        ],
+        "fabricated_values": [
+          "140%"
+        ],
+        "outdated_value_leaked": false,
+        "fabricated": true,
+        "classification": "fabricated"
+      },
+      "flags": {
+        "no_context_correct": false,
+        "gold_correct": false,
+        "retrieved_correct": false,
+        "all_three_correct": false,
+        "gold_has_post_value": true,
+        "outdated_value_leaked": false,
+        "fabricated": true,
+        "legacy_answered_old": true
+      },
+      "conditions": {
+        "no_context": {
+          "doc_ids": [],
+          "answer": "베른하르트의 스카이폴 엣지 효과를 적용한 상태에서의 최종 데미지는 원래 데미지의 140%가 됩니다.\n\n예를 들어, 원래의 기본 데미지를 기준으로 하겠습니다. \n\n- 기본 데미지: 500\n- 스카이폴 엣지 효과 적용 후: 500 * 1.4 = 700\n\n따라서 딜 세팅을 짤 때는 최종적으로 700의 데미지를 가정하면 됩니다.",
+          "eval": {
+            "qid": "q006",
+            "answer_type": "outdated_trap",
+            "correctness": {
+              "verdict": "no",
+              "reason": "gold 키워드 0/3 매칭",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "no",
+              "reason": "context 어휘 오버랩 0.00 (<= 0.3)",
+              "method": "rule"
+            },
+            "hallucination": {
+              "verdict": "no",
+              "reason": "규칙 게이트 미충족: A=False[], B=False(정답수치 ['55%'] 중 [] 포함) → LLM: ",
+              "method": "llm"
+            }
+          },
+          "correct": false
+        },
+        "gold_context": {
+          "doc_ids": [
+            "doc_w002",
+            "doc_w001"
+          ],
+          "answer": "주어진 문서로는 알 수 없다. 주어진 정보에서는 베른하르트의 스카이폴 엣지 최종 데미지 증가율이 40%에서 55%로 변경되었다는 내용만 확인할 수 있다. 이전에 40%였던 것을 현재는 55%로 상향 조정된 것으로 보인다. 따라서, 베른하르트의 스카이폴 엣지 스킬을 기반으로 한 딜 세팅은 최신 정보를 바탕으로 계획해야 한다.",
+          "eval": {
+            "qid": "q006",
+            "answer_type": "outdated_trap",
+            "correctness": {
+              "verdict": "no",
+              "reason": "규칙 애매(2/3) → LLM: 표현이 달라진다",
+              "method": "llm"
+            },
+            "faithfulness": {
+              "verdict": "no",
+              "reason": "context 어휘 오버랩 0.23 (<= 0.3)",
+              "method": "rule"
+            },
+            "hallucination": {
+              "verdict": "no",
+              "reason": "규칙 게이트 통과: A(정정신호)=['변경', '현재'] & B(정답수치)=['55%'] → 환각 아님",
+              "method": "rule"
+            }
+          },
+          "correct": false
+        },
+        "retrieved_context": {
+          "doc_ids": [
+            "doc_w002",
+            "doc_w001",
+            "doc_w003",
+            "doc_a002",
+            "doc_a001"
+          ],
+          "answer": "주어진 문서로는 알 수 없다. 베른하르트의 스카이폴 엣지 스킬 최종 데미지 증가율은 시즌2 밸런스 패치 이후 55%로 변경되었다. 이 정보를 기반으로 세팅을 짜야 한다.",
+          "eval": {
+            "qid": "q006",
+            "answer_type": "outdated_trap",
+            "correctness": {
+              "verdict": "no",
+              "reason": "규칙 애매(2/3) → LLM: 스카이폴 엣지의 최종 데미지 증가율 변경 정보와 일치하지 않음",
+              "method": "llm"
+            },
+            "faithfulness": {
+              "verdict": "no",
+              "reason": "오버랩 애매(0.46) → LLM: 주어진 문서에 베른하르트의 스카이폴 엣지 스킬 최종 데미지 증가율 변경 정보 없음",
+              "method": "llm"
+            },
+            "hallucination": {
+              "verdict": "no",
+              "reason": "규칙 게이트 통과: A(정정신호)=['패치', '변경'] & B(정답수치)=['55%'] → 환각 아님",
+              "method": "rule"
+            }
+          },
+          "correct": false
+        }
+      }
+    },
+    {
+      "qid": "q007",
+      "answer_type": "fact",
+      "question": "셀레스티아의 6차 오리진 스킬 이름은 무엇인가?",
+      "outdated_value": null,
+      "post_value": null,
+      "diagnosis": "ok",
+      "labels": [],
+      "diagnosis_legacy": "ok",
+      "gold_post_value_present": null,
+      "no_context_numeric_check": {
+        "question_values": [],
+        "answer_values": [],
+        "leaked_values": [],
+        "invented_values": [],
+        "fabricated_values": [],
+        "outdated_value_leaked": false,
+        "fabricated": false,
+        "classification": "no_numeric"
+      },
+      "flags": {
+        "no_context_correct": false,
+        "gold_correct": true,
+        "retrieved_correct": true,
+        "all_three_correct": false,
+        "gold_has_post_value": false,
+        "outdated_value_leaked": false,
+        "fabricated": false,
+        "legacy_answered_old": false
+      },
+      "conditions": {
+        "no_context": {
+          "doc_ids": [],
+          "answer": "셀레스티아의 6차 오리진 스킬 이름은 알려지지 않았다. 게임 내에서 이 정보는 공개되지 않은 채널이나 문서에만 제한되어 있을 수 있습니다.",
+          "eval": {
+            "qid": "q007",
+            "answer_type": "fact",
+            "correctness": {
+              "verdict": "no",
+              "reason": "규칙 애매(1/2) → LLM: 핵심 명칭 '아스트랄 카타클리즘'이 틀림",
+              "method": "llm"
+            },
+            "faithfulness": {
+              "verdict": "no",
+              "reason": "context 어휘 오버랩 0.00 (<= 0.3)",
+              "method": "rule"
+            }
+          },
+          "correct": false
+        },
+        "gold_context": {
+          "doc_ids": [
+            "doc_m002",
+            "doc_m001"
+          ],
+          "answer": "셀레스티아의 6차 오리진 스킬 이름은 '아스트랄 카타클리즘'이다. 주어진 문서로는 알 수 없다가 패치로 변경된 정보다.",
+          "eval": {
+            "qid": "q007",
+            "answer_type": "fact",
+            "correctness": {
+              "verdict": "yes",
+              "reason": "gold 키워드 전부 매칭 ['아스트랄 카타클리즘', '오리진']",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "no",
+              "reason": "오버랩 애매(0.41) → LLM: 답변에 대한 근거가 없는 부분이 포함되어 있음",
+              "method": "llm"
+            }
+          },
+          "correct": true
+        },
+        "retrieved_context": {
+          "doc_ids": [
+            "doc_m001",
+            "doc_m003",
+            "doc_t001",
+            "doc_m002",
+            "doc_w001"
+          ],
+          "answer": "셀레스티아의 6차 오리진 스킬 이름은 '아스트랄 카타클리즘'이다.",
+          "eval": {
+            "qid": "q007",
+            "answer_type": "fact",
+            "correctness": {
+              "verdict": "yes",
+              "reason": "gold 키워드 전부 매칭 ['아스트랄 카타클리즘', '오리진']",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "yes",
+              "reason": "context 어휘 오버랩 0.78 (>= 0.6)",
+              "method": "rule"
+            }
+          },
+          "correct": true
+        }
+      }
+    },
+    {
+      "qid": "q008",
+      "answer_type": "multi_hop",
+      "question": "셀레스티아의 5차 스킬을 발동시키려면 원소 마크가 몇 개 필요하고, 그 중첩을 가장 빠르게 쌓게 해주는 하이퍼 스킬은 무엇인가?",
+      "outdated_value": null,
+      "post_value": null,
+      "diagnosis": "ok",
+      "labels": [],
+      "diagnosis_legacy": "ok",
+      "gold_post_value_present": null,
+      "no_context_numeric_check": {
+        "question_values": [],
+        "answer_values": [],
+        "leaked_values": [],
+        "invented_values": [],
+        "fabricated_values": [],
+        "outdated_value_leaked": false,
+        "fabricated": false,
+        "classification": "no_numeric"
+      },
+      "flags": {
+        "no_context_correct": false,
+        "gold_correct": true,
+        "retrieved_correct": true,
+        "all_three_correct": false,
+        "gold_has_post_value": false,
+        "outdated_value_leaked": false,
+        "fabricated": false,
+        "legacy_answered_old": false
+      },
+      "conditions": {
+        "no_context": {
+          "doc_ids": [],
+          "answer": "셀레스티아의 5차 스킬을 발동하기 위해서는 모든 원소 마크를 사용해야 합니다. 이는 화염, 얼음, 불꽃, 그리고 빛으로 구성되어 있습니다. 따라서 총 4개의 원소 마크가 필요합니다.\n\n그 중 가장 빠르게 마크를 쌓아올릴 수 있는 하이퍼 스킬은 '빛의 투명성'입니다. 이 스킬을 사용하면 화염, 얼음, 불꽃 마크를 동시에 생성할 수 있습니다. 따라서 이 스킬을 사용하면 원소 마크를 가장 빠르게 쌓을 수 있습니다.",
+          "eval": {
+            "qid": "q008",
+            "answer_type": "multi_hop",
+            "correctness": {
+              "verdict": "no",
+              "reason": "gold 키워드 0/2 매칭",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "no",
+              "reason": "context 어휘 오버랩 0.00 (<= 0.3)",
+              "method": "rule"
+            }
+          },
+          "correct": false
+        },
+        "gold_context": {
+          "doc_ids": [
+            "doc_m003",
+            "doc_m004"
+          ],
+          "answer": "셀레스티아의 5차 스킬 '엘리멘탈 레조넌스'를 발동하려면 원소 마크가 6개 중첩되어야 합니다.\n\n그 중첩을 가장 빠르게 쌓게 해주는 하이퍼 스킬은 '매나 서지'입니다.",
+          "eval": {
+            "qid": "q008",
+            "answer_type": "multi_hop",
+            "correctness": {
+              "verdict": "yes",
+              "reason": "gold 키워드 전부 매칭 ['6', '매나 서지']",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "yes",
+              "reason": "오버랩 애매(0.56) → LLM: ",
+              "method": "llm"
+            }
+          },
+          "correct": true
+        },
+        "retrieved_context": {
+          "doc_ids": [
+            "doc_m003",
+            "doc_m004",
+            "doc_t004",
+            "doc_m001",
+            "doc_t003"
+          ],
+          "answer": "셀레스티아의 5차 스킬 '엘리멘탈 레조넌스'를 발동하려면 원소 마크가 6개 중첩되어야 한다. 그 중첩을 가장 빠르게 쌓게 해주는 하이퍼 스킬은 '매나 서지'이다.",
+          "eval": {
+            "qid": "q008",
+            "answer_type": "multi_hop",
+            "correctness": {
+              "verdict": "yes",
+              "reason": "gold 키워드 전부 매칭 ['6', '매나 서지']",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "yes",
+              "reason": "오버랩 애매(0.56) → LLM: ",
+              "method": "llm"
+            }
+          },
+          "correct": true
+        }
+      }
+    },
+    {
+      "qid": "q009",
+      "answer_type": "outdated_trap",
+      "question": "셀레스티아의 아스트랄 카타클리즘 지속시간이 30초인데, 이 30초를 전제로 성역 운영법을 알려줘.",
+      "outdated_value": "30초",
+      "post_value": "40초",
+      "diagnosis": "judge_uncertain",
+      "labels": [
+        "question_leaked_outdated_value",
+        "judge_uncertain"
+      ],
+      "diagnosis_legacy": "generation_failure",
+      "gold_post_value_present": true,
+      "no_context_numeric_check": {
+        "question_values": [
+          "30초"
+        ],
+        "answer_values": [
+          "30초"
+        ],
+        "leaked_values": [
+          "30초"
+        ],
+        "invented_values": [],
+        "fabricated_values": [],
+        "outdated_value_leaked": true,
+        "fabricated": false,
+        "classification": "leaked"
+      },
+      "flags": {
+        "no_context_correct": false,
+        "gold_correct": false,
+        "retrieved_correct": false,
+        "all_three_correct": false,
+        "gold_has_post_value": true,
+        "outdated_value_leaked": true,
+        "fabricated": false,
+        "legacy_answered_old": true
+      },
+      "conditions": {
+        "no_context": {
+          "doc_ids": [],
+          "answer": "성역 운영법에 대한 정보가 주어진 대로 30초라는 시간 범위 내에서 제공해 드릴 수는 없습니다. 하지만 일반적으로 성역은 특정한 영역에서 일정 기간 동안 특별한 법칙이 적용되는 공간을 말합니다. 이를 위해 사용자는 적절한 준비와 계획이 필요하며, 30초라는 시간 범위 내에서는 이에 대한 세부적인 지침이나 예를 제공하기 어렵습니다. 실제 게임 상의 성역 운영법은 각 게임마다 다르게 정의될 수 있습니다.",
+          "eval": {
+            "qid": "q009",
+            "answer_type": "outdated_trap",
+            "correctness": {
+              "verdict": "no",
+              "reason": "gold 키워드 0/3 매칭",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "no",
+              "reason": "context 어휘 오버랩 0.00 (<= 0.3)",
+              "method": "rule"
+            },
+            "hallucination": {
+              "verdict": "yes",
+              "reason": "규칙 게이트 미충족: A=False[], B=False(정답수치 ['40초'] 중 [] 포함) → LLM: 패치로 30초가 됐는데 구버전 30초를 현재 사실처럼 말함",
+              "method": "llm"
+            }
+          },
+          "correct": false
+        },
+        "gold_context": {
+          "doc_ids": [
+            "doc_m002",
+            "doc_m001"
+          ],
+          "answer": "주어진 문서로는 알 수 없다. 셀레스티아의 아스트랄 카타클리즘의 최신 정보에 따르면, 지속시간은 40초가 되었다. 이전에는 30초였으나, 패치를 통해 변경되었다. 따라서 시즌1 기준으로 성역을 운영하는 방법은 주어진 정보로는 추측이 가능하다.",
+          "eval": {
+            "qid": "q009",
+            "answer_type": "outdated_trap",
+            "correctness": {
+              "verdict": "no",
+              "reason": "규칙 애매(2/3) → LLM: ",
+              "method": "llm"
+            },
+            "faithfulness": {
+              "verdict": "no",
+              "reason": "context 어휘 오버랩 0.26 (<= 0.3)",
+              "method": "rule"
+            },
+            "hallucination": {
+              "verdict": "no",
+              "reason": "규칙 게이트 통과: A(정정신호)=['패치', '변경'] & B(정답수치)=['40초'] → 환각 아님",
+              "method": "rule"
+            }
+          },
+          "correct": false
+        },
+        "retrieved_context": {
+          "doc_ids": [
+            "doc_m002",
+            "doc_m001",
+            "doc_g002",
+            "doc_m003",
+            "doc_g004"
+          ],
+          "answer": "셀레스티아의 아스트랄 카타클리즘은 30초 동안 광역 성역을 유지하며, 그 안에서 아군을 강화하고 적을 약화시킨다. 이 성역 내에서는 원소 마크를 부여하는 다른 스킬과 상호작용이 가능하다. 따라서 30초 동안의 지속 시간을 활용하여 적을 효과적으로 공격하거나, 필요한 경우 아군을 보호하고 강화할 수 있다.",
+          "eval": {
+            "qid": "q009",
+            "answer_type": "outdated_trap",
+            "correctness": {
+              "verdict": "no",
+              "reason": "gold 키워드 0/3 매칭",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "yes",
+              "reason": "오버랩 애매(0.42) → LLM: ",
+              "method": "llm"
+            },
+            "hallucination": {
+              "verdict": "no",
+              "reason": "규칙 게이트 미충족: A=False[], B=False(정답수치 ['40초'] 중 [] 포함) → LLM: ",
+              "method": "llm"
+            }
+          },
+          "correct": false
+        }
+      }
+    },
+    {
+      "qid": "q010",
+      "answer_type": "fact",
+      "question": "실비아의 6차 오리진 스킬 이름은 무엇인가?",
+      "outdated_value": null,
+      "post_value": null,
+      "diagnosis": "ok",
+      "labels": [],
+      "diagnosis_legacy": "ok",
+      "gold_post_value_present": null,
+      "no_context_numeric_check": {
+        "question_values": [],
+        "answer_values": [],
+        "leaked_values": [],
+        "invented_values": [],
+        "fabricated_values": [],
+        "outdated_value_leaked": false,
+        "fabricated": false,
+        "classification": "no_numeric"
+      },
+      "flags": {
+        "no_context_correct": false,
+        "gold_correct": true,
+        "retrieved_correct": true,
+        "all_three_correct": false,
+        "gold_has_post_value": false,
+        "outdated_value_leaked": false,
+        "fabricated": false,
+        "legacy_answered_old": false
+      },
+      "conditions": {
+        "no_context": {
+          "doc_ids": [],
+          "answer": "실비아의 6단계 오리진 스킬 이름은 \"오리진: 파괴의 여신\"이다.",
+          "eval": {
+            "qid": "q010",
+            "answer_type": "fact",
+            "correctness": {
+              "verdict": "no",
+              "reason": "규칙 애매(1/2) → LLM: 핵심 명칭 '템페스트 레인'이 틀림",
+              "method": "llm"
+            },
+            "faithfulness": {
+              "verdict": "no",
+              "reason": "context 어휘 오버랩 0.00 (<= 0.3)",
+              "method": "rule"
+            }
+          },
+          "correct": false
+        },
+        "gold_context": {
+          "doc_ids": [
+            "doc_a002",
+            "doc_a001"
+          ],
+          "answer": "실비아의 6차 오리진 스킬 이름은 '템페스트 레인'이다. 주어진 문서로는 알 수 있다.",
+          "eval": {
+            "qid": "q010",
+            "answer_type": "fact",
+            "correctness": {
+              "verdict": "yes",
+              "reason": "gold 키워드 전부 매칭 ['템페스트 레인', '오리진']",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "yes",
+              "reason": "오버랩 애매(0.50) → LLM: ",
+              "method": "llm"
+            }
+          },
+          "correct": true
+        },
+        "retrieved_context": {
+          "doc_ids": [
+            "doc_a001",
+            "doc_w001",
+            "doc_m001",
+            "doc_t001",
+            "doc_a002"
+          ],
+          "answer": "실비아의 6차 오리진 스킬 이름은 '템페스트 레인'이다.",
+          "eval": {
+            "qid": "q010",
+            "answer_type": "fact",
+            "correctness": {
+              "verdict": "yes",
+              "reason": "gold 키워드 전부 매칭 ['템페스트 레인', '오리진']",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "yes",
+              "reason": "context 어휘 오버랩 0.78 (>= 0.6)",
+              "method": "rule"
+            }
+          },
+          "correct": true
+        }
+      }
+    },
+    {
+      "qid": "q011",
+      "answer_type": "multi_hop",
+      "question": "실비아의 5차 스킬을 발동시키려면 조준 스택이 몇 개 필요하고, 그 스택을 가장 빠르게 쌓게 해주는 하이퍼 스킬은 무엇인가?",
+      "outdated_value": null,
+      "post_value": null,
+      "diagnosis": "ok",
+      "labels": [],
+      "diagnosis_legacy": "ok",
+      "gold_post_value_present": null,
+      "no_context_numeric_check": {
+        "question_values": [],
+        "answer_values": [],
+        "leaked_values": [],
+        "invented_values": [],
+        "fabricated_values": [],
+        "outdated_value_leaked": false,
+        "fabricated": false,
+        "classification": "no_numeric"
+      },
+      "flags": {
+        "no_context_correct": false,
+        "gold_correct": true,
+        "retrieved_correct": true,
+        "all_three_correct": false,
+        "gold_has_post_value": false,
+        "outdated_value_leaked": false,
+        "fabricated": false,
+        "legacy_answered_old": false
+      },
+      "conditions": {
+        "no_context": {
+          "doc_ids": [],
+          "answer": "실비아의 5차 스킬 '데스 허슬' 발동에 필요한 조준 스택은 10개입니다. 그 중에서 가장 빠르게 스택을 쌓게 해주는 하이퍼 스킬은 '데스 허슬: 디버프'입니다.",
+          "eval": {
+            "qid": "q011",
+            "answer_type": "multi_hop",
+            "correctness": {
+              "verdict": "no",
+              "reason": "gold 키워드 0/2 매칭",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "no",
+              "reason": "context 어휘 오버랩 0.00 (<= 0.3)",
+              "method": "rule"
+            }
+          },
+          "correct": false
+        },
+        "gold_context": {
+          "doc_ids": [
+            "doc_a003",
+            "doc_a004"
+          ],
+          "answer": "실비아의 5차 스킬 '헌터스 포커스'를 발동하려면 한 대상에게 조준 스택이 7개 누적되어야 한다. 그 스택을 가장 빠르게 쌓게 해주는 하이퍼 스킬은 '호크 사이트'이다.",
+          "eval": {
+            "qid": "q011",
+            "answer_type": "multi_hop",
+            "correctness": {
+              "verdict": "yes",
+              "reason": "gold 키워드 전부 매칭 ['7', '호크 사이트']",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "yes",
+              "reason": "context 어휘 오버랩 0.63 (>= 0.6)",
+              "method": "rule"
+            }
+          },
+          "correct": true
+        },
+        "retrieved_context": {
+          "doc_ids": [
+            "doc_a003",
+            "doc_a004",
+            "doc_w003",
+            "doc_a001",
+            "doc_w004"
+          ],
+          "answer": "실비아의 5차 스킬 '헌터스 포커스'를 발동시키려면 조준 스택이 7개 필요하다.\n\n그 스택을 가장 빠르게 쌓게 해주는 하이퍼 스킬은 '호크 사이트'이다.",
+          "eval": {
+            "qid": "q011",
+            "answer_type": "multi_hop",
+            "correctness": {
+              "verdict": "yes",
+              "reason": "gold 키워드 전부 매칭 ['7', '호크 사이트']",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "yes",
+              "reason": "context 어휘 오버랩 0.62 (>= 0.6)",
+              "method": "rule"
+            }
+          },
+          "correct": true
+        }
+      }
+    },
+    {
+      "qid": "q012",
+      "answer_type": "outdated_trap",
+      "question": "실비아의 템페스트 레인 치명타 확률 증가가 25%인데, 이 25%를 전제로 치명타 빌드를 짜줘.",
+      "outdated_value": "25%",
+      "post_value": "35%",
+      "diagnosis": "judge_uncertain",
+      "labels": [
+        "question_leaked_outdated_value",
+        "judge_uncertain"
+      ],
+      "diagnosis_legacy": "generation_failure",
+      "gold_post_value_present": true,
+      "no_context_numeric_check": {
+        "question_values": [
+          "25%"
+        ],
+        "answer_values": [
+          "25%"
+        ],
+        "leaked_values": [
+          "25%"
+        ],
+        "invented_values": [],
+        "fabricated_values": [],
+        "outdated_value_leaked": true,
+        "fabricated": false,
+        "classification": "leaked"
+      },
+      "flags": {
+        "no_context_correct": false,
+        "gold_correct": false,
+        "retrieved_correct": false,
+        "all_three_correct": false,
+        "gold_has_post_value": true,
+        "outdated_value_leaked": true,
+        "fabricated": false,
+        "legacy_answered_old": true
+      },
+      "conditions": {
+        "no_context": {
+          "doc_ids": [],
+          "answer": "실비아의 템페스트 레인에 대한 치명타 확률이 25% 증가한 상황에서 치명타 빌드를 짤 경우, 다음과 같이 구성할 수 있습니다:\n\n1. 기본 공격력: 최대치 유지\n2. 마나 회복량: 최소치 유지 (마나 회복은 치명타에 영향을 받지 않으므로)\n3. 피해량 증가: 25% 추가로 설정\n\n예를 들어, 기본 피해량이 1000이라고 가정하면, 치명타 확률이 25% 증가한 후의 피해량은 1250이 됩니다.\n\n따라서, 치명타 빌드는 다음과 같이 구성됩니다:\n\n- 공격력: 최대치 유지\n- 마나 회복량: 최소치 유지\n- 피해량 증가: 25% 추가\n\n즉, 기본 피해량이 1000인 경우, 치명타를 적용하면 1250의 피해가 됩니다.",
+          "eval": {
+            "qid": "q012",
+            "answer_type": "outdated_trap",
+            "correctness": {
+              "verdict": "no",
+              "reason": "gold 키워드 0/3 매칭",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "no",
+              "reason": "context 어휘 오버랩 0.00 (<= 0.3)",
+              "method": "rule"
+            },
+            "hallucination": {
+              "verdict": "yes",
+              "reason": "규칙 게이트 미충족: A=False[], B=False(정답수치 ['35%'] 중 [] 포함) → LLM: 현재 사실을 현재 상황에 대한 예측으로 잘못 해석함",
+              "method": "llm"
+            }
+          },
+          "correct": false
+        },
+        "gold_context": {
+          "doc_ids": [
+            "doc_a002",
+            "doc_a001"
+          ],
+          "answer": "주어진 문서로는 알 수 없다. 시즌2 밸런스 패치 후 실비아의 템페스트 레인의 치명타 확률은 35%가 됐으므로, 이 정보를 기준으로 치명타 빌드를 짤 필요가 있다.",
+          "eval": {
+            "qid": "q012",
+            "answer_type": "outdated_trap",
+            "correctness": {
+              "verdict": "no",
+              "reason": "규칙 애매(2/3) → LLM: 치명타 확률 증가량이 틀리다",
+              "method": "llm"
+            },
+            "faithfulness": {
+              "verdict": "no",
+              "reason": "오버랩 애매(0.32) → LLM: 답변에 시즌2 밸런스 패치와 관련된 정보가 포함되어 있지만, 이는 주어진 두 문서로만 확인할 수 있는 정보다.",
+              "method": "llm"
+            },
+            "hallucination": {
+              "verdict": "no",
+              "reason": "규칙 게이트 통과: A(정정신호)=['패치'] & B(정답수치)=['35%'] → 환각 아님",
+              "method": "rule"
+            }
+          },
+          "correct": false
+        },
+        "retrieved_context": {
+          "doc_ids": [
+            "doc_a002",
+            "doc_a001",
+            "doc_a003",
+            "doc_a004",
+            "doc_g002"
+          ],
+          "answer": "주어진 문서로는 알 수 없다.",
+          "eval": {
+            "qid": "q012",
+            "answer_type": "outdated_trap",
+            "correctness": {
+              "verdict": "no",
+              "reason": "gold 키워드 0/3 매칭",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "no",
+              "reason": "context 어휘 오버랩 0.20 (<= 0.3)",
+              "method": "rule"
+            },
+            "hallucination": {
+              "verdict": "no",
+              "reason": "규칙 게이트 미충족: A=False[], B=False(정답수치 ['35%'] 중 [] 포함) → LLM: ",
+              "method": "llm"
+            }
+          },
+          "correct": false
+        }
+      }
+    },
+    {
+      "qid": "q013",
+      "answer_type": "fact",
+      "question": "카이든의 6차 오리진 스킬 이름은 무엇인가?",
+      "outdated_value": null,
+      "post_value": null,
+      "diagnosis": "ok",
+      "labels": [],
+      "diagnosis_legacy": "ok",
+      "gold_post_value_present": null,
+      "no_context_numeric_check": {
+        "question_values": [],
+        "answer_values": [],
+        "leaked_values": [],
+        "invented_values": [],
+        "fabricated_values": [],
+        "outdated_value_leaked": false,
+        "fabricated": false,
+        "classification": "no_numeric"
+      },
+      "flags": {
+        "no_context_correct": false,
+        "gold_correct": true,
+        "retrieved_correct": true,
+        "all_three_correct": false,
+        "gold_has_post_value": false,
+        "outdated_value_leaked": false,
+        "fabricated": false,
+        "legacy_answered_old": false
+      },
+      "conditions": {
+        "no_context": {
+          "doc_ids": [],
+          "answer": "카이든의 6단계 오리진 스킬 이름은 \"오리진: 파괴\" (Origin: Devastate)이다.",
+          "eval": {
+            "qid": "q013",
+            "answer_type": "fact",
+            "correctness": {
+              "verdict": "no",
+              "reason": "규칙 애매(1/2) → LLM: 핵심 명칭 '섀도우 이클립스'가 틀림",
+              "method": "llm"
+            },
+            "faithfulness": {
+              "verdict": "no",
+              "reason": "context 어휘 오버랩 0.00 (<= 0.3)",
+              "method": "rule"
+            }
+          },
+          "correct": false
+        },
+        "gold_context": {
+          "doc_ids": [
+            "doc_t002",
+            "doc_t001"
+          ],
+          "answer": "카이든의 6차 오리진 스킬 이름은 '섀도우 이클립스'다. 주어진 문서로는 알 수 없다가 패치로 변경되었다.",
+          "eval": {
+            "qid": "q013",
+            "answer_type": "fact",
+            "correctness": {
+              "verdict": "yes",
+              "reason": "gold 키워드 전부 매칭 ['섀도우 이클립스', '오리진']",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "no",
+              "reason": "오버랩 애매(0.44) → LLM: 지금 답변에는 주어진 두 문서에서 확인할 수 없는 정보가 포함되어 있다.",
+              "method": "llm"
+            }
+          },
+          "correct": true
+        },
+        "retrieved_context": {
+          "doc_ids": [
+            "doc_t001",
+            "doc_w001",
+            "doc_m001",
+            "doc_t002",
+            "doc_a001"
+          ],
+          "answer": "카이든의 6차 오리진 스킬 이름은 '섀도우 이클립스'다.",
+          "eval": {
+            "qid": "q013",
+            "answer_type": "fact",
+            "correctness": {
+              "verdict": "yes",
+              "reason": "gold 키워드 전부 매칭 ['섀도우 이클립스', '오리진']",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "yes",
+              "reason": "context 어휘 오버랩 0.78 (>= 0.6)",
+              "method": "rule"
+            }
+          },
+          "correct": true
+        }
+      }
+    },
+    {
+      "qid": "q014",
+      "answer_type": "multi_hop",
+      "question": "카이든의 5차 스킬을 발동시키려면 중독 낙인이 몇 개 필요하고, 그 중첩을 가장 빠르게 쌓게 해주는 하이퍼 스킬은 무엇인가?",
+      "outdated_value": null,
+      "post_value": null,
+      "diagnosis": "ok",
+      "labels": [],
+      "diagnosis_legacy": "ok",
+      "gold_post_value_present": null,
+      "no_context_numeric_check": {
+        "question_values": [],
+        "answer_values": [],
+        "leaked_values": [],
+        "invented_values": [],
+        "fabricated_values": [],
+        "outdated_value_leaked": false,
+        "fabricated": false,
+        "classification": "no_numeric"
+      },
+      "flags": {
+        "no_context_correct": false,
+        "gold_correct": true,
+        "retrieved_correct": true,
+        "all_three_correct": false,
+        "gold_has_post_value": false,
+        "outdated_value_leaked": false,
+        "fabricated": false,
+        "legacy_answered_old": false
+      },
+      "conditions": {
+        "no_context": {
+          "doc_ids": [],
+          "answer": "카이든의 5단 스킬 '데스 퀘스트'를 발동하기 위해서는 10개의 중독 낙인이 필요합니다. 그 중 가장 빠르게 쌓을 수 있는 하이퍼 스킬은 '데스 퀘스트: 파괴'입니다.",
+          "eval": {
+            "qid": "q014",
+            "answer_type": "multi_hop",
+            "correctness": {
+              "verdict": "no",
+              "reason": "gold 키워드 0/2 매칭",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "no",
+              "reason": "context 어휘 오버랩 0.00 (<= 0.3)",
+              "method": "rule"
+            }
+          },
+          "correct": false
+        },
+        "gold_context": {
+          "doc_ids": [
+            "doc_t003",
+            "doc_t004"
+          ],
+          "answer": "카이든의 5차 스킬 '베놈 브랜드'를 발동하기 위해서는 한 대상에게 중독 낙인이 9개까지 중첩되어야 합니다. 그 중복을 가장 빠르게 쌓아줄 하이퍼 스킬은 '페이탈 마크'입니다.",
+          "eval": {
+            "qid": "q014",
+            "answer_type": "multi_hop",
+            "correctness": {
+              "verdict": "yes",
+              "reason": "gold 키워드 전부 매칭 ['9', '페이탈 마크']",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "yes",
+              "reason": "오버랩 애매(0.56) → LLM: ",
+              "method": "llm"
+            }
+          },
+          "correct": true
+        },
+        "retrieved_context": {
+          "doc_ids": [
+            "doc_t003",
+            "doc_t004",
+            "doc_t001",
+            "doc_m004",
+            "doc_m003"
+          ],
+          "answer": "카이튼의 5차 스킬 '베놈 브랜드'를 발동하기 위해서는 한 대상에게 중독 낙인이 9개 중첩되어야 한다.\n\n하이퍼 스킬로 중독 낙인 중첩을 가장 빠르게 쌓게 해주는 것은 하이퍼 스킬 '페이탈 마크'이다.",
+          "eval": {
+            "qid": "q014",
+            "answer_type": "multi_hop",
+            "correctness": {
+              "verdict": "yes",
+              "reason": "gold 키워드 전부 매칭 ['9', '페이탈 마크']",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "yes",
+              "reason": "오버랩 애매(0.59) → LLM: ",
+              "method": "llm"
+            }
+          },
+          "correct": true
+        }
+      }
+    },
+    {
+      "qid": "q015",
+      "answer_type": "outdated_trap",
+      "question": "카이든의 섀도우 이클립스 재사용 대기시간이 60초인데, 이 60초를 전제로 진입 타이밍을 잡아줘.",
+      "outdated_value": "60초",
+      "post_value": "45초",
+      "diagnosis": "question_leaked_outdated_value",
+      "labels": [
+        "question_leaked_outdated_value",
+        "fabricated_value"
+      ],
+      "diagnosis_legacy": "parametric_outdated_bias",
+      "gold_post_value_present": true,
+      "no_context_numeric_check": {
+        "question_values": [
+          "60초"
+        ],
+        "answer_values": [
+          "60초",
+          "70초"
+        ],
+        "leaked_values": [
+          "60초"
+        ],
+        "invented_values": [
+          "70초"
+        ],
+        "fabricated_values": [
+          "70초"
+        ],
+        "outdated_value_leaked": true,
+        "fabricated": true,
+        "classification": "leaked+fabricated"
+      },
+      "flags": {
+        "no_context_correct": false,
+        "gold_correct": true,
+        "retrieved_correct": true,
+        "all_three_correct": false,
+        "gold_has_post_value": true,
+        "outdated_value_leaked": true,
+        "fabricated": true,
+        "legacy_answered_old": true
+      },
+      "conditions": {
+        "no_context": {
+          "doc_ids": [],
+          "answer": "카이든의 섀도우 이클립스 사용 시 대기 시간은 약 60초입니다. 이를 고려해 진입 타이밍을 잡는다면, 실제 사용자가 게임 환경과 적 위치에 따라 약 50-70초 사이에서 사용자의 개인적인 준비 시간 등을 고려하여 최적의 타이밍을 찾는 것이 좋습니다.",
+          "eval": {
+            "qid": "q015",
+            "answer_type": "outdated_trap",
+            "correctness": {
+              "verdict": "no",
+              "reason": "gold 키워드 0/3 매칭",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "no",
+              "reason": "context 어휘 오버랩 0.00 (<= 0.3)",
+              "method": "rule"
+            },
+            "hallucination": {
+              "verdict": "no",
+              "reason": "규칙 게이트 미충족: A=False[], B=False(정답수치 ['45초'] 중 [] 포함) → LLM: ",
+              "method": "llm"
+            }
+          },
+          "correct": false
+        },
+        "gold_context": {
+          "doc_ids": [
+            "doc_t002",
+            "doc_t001"
+          ],
+          "answer": "주어진 문서로는 알 수 없다. 시즌2 밸런스 패치에서 60초에서 45초로 단축되었다고 하지만, 그 전의 기준은 명시되어 있지 않다.",
+          "eval": {
+            "qid": "q015",
+            "answer_type": "outdated_trap",
+            "correctness": {
+              "verdict": "yes",
+              "reason": "gold 키워드 전부 매칭 ['45초', '패치', '단축']",
+              "method": "rule"
+            },
+            "faithfulness": {
+              "verdict": "yes",
+              "reason": "오버랩 애매(0.38) → LLM: 답변이 주어진 문서와 일치",
+              "method": "llm"
+            },
+            "hallucination": {
+              "verdict": "no",
+              "reason": "규칙 게이트 통과: A(정정신호)=['패치'] & B(정답수치)=['45초'] → 환각 아님",
+              "method": "rule"
+            }
+          },
+          "correct": true
+        },
+        "retrieved_context": {
+          "doc_ids": [
+            "doc_t001",
+            "doc_t002",
+            "doc_g002",
+            "doc_m002",
+            "doc_m001"
+          ],
+          "answer": "주어진 문서로는 알 수 없다. 카이든의 섀도우 이클립스 스킬의 재사용 대기시간은 시즌2 밸런스 패치 후 45초가 되었다. 이 정보를 기반으로 진입 타이밍을 계산해야 한다.",
+          "eval": {
+            "qid": "q015",
+            "answer_type": "outdated_trap",
+            "correctness": {
+              "verdict": "yes",
+              "reason": "규칙 애매(2/3) → LLM: ",
+              "method": "llm"
+            },
+            "faithfulness": {
+              "verdict": "yes",
+              "reason": "오버랩 애매(0.38) → LLM: ",
+              "method": "llm"
+            },
+            "hallucination": {
+              "verdict": "no",
+              "reason": "규칙 게이트 통과: A(정정신호)=['패치'] & B(정답수치)=['45초'] → 환각 아님",
+              "method": "rule"
+            }
+          },
+          "correct": true
+        }
+      }
+    }
+  ],
+  "cross_table": {
+    "no_context": {
+      "fact": {
+        "correct": 0,
+        "total": 5
+      },
+      "multi_hop": {
+        "correct": 0,
+        "total": 5
+      },
+      "outdated_trap": {
+        "correct": 0,
+        "total": 5
+      },
+      "ALL": {
+        "correct": 0,
+        "total": 15
+      }
+    },
+    "gold_context": {
+      "fact": {
+        "correct": 5,
+        "total": 5
+      },
+      "multi_hop": {
+        "correct": 5,
+        "total": 5
+      },
+      "outdated_trap": {
+        "correct": 1,
+        "total": 5
+      },
+      "ALL": {
+        "correct": 11,
+        "total": 15
+      }
+    },
+    "retrieved_context": {
+      "fact": {
+        "correct": 5,
+        "total": 5
+      },
+      "multi_hop": {
+        "correct": 5,
+        "total": 5
+      },
+      "outdated_trap": {
+        "correct": 1,
+        "total": 5
+      },
+      "ALL": {
+        "correct": 11,
+        "total": 15
+      }
+    }
+  },
+  "diagnosis_distribution": {
+    "ok": 10,
+    "generation_failure": 0,
+    "judge_uncertain": 4,
+    "retrieval_failure": 0,
+    "question_leaked_outdated_value": 1
+  },
+  "diagnosis_distribution_legacy": {
+    "ok": 10,
+    "generation_failure": 4,
+    "retrieval_failure": 0,
+    "parametric_outdated_bias": 1
+  },
+  "multi_label_distribution": {
+    "question_leaked_outdated_value": 4,
+    "fabricated_value": 2,
+    "judge_uncertain": 4
+  }
+}
